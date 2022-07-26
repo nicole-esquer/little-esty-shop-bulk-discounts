@@ -23,7 +23,7 @@ RSpec.describe "merchants items index page", type: :feature do
             description: "Size L stain resistant jersey", 
             unit_price: 20000, merchant_id: merchant_2.id)
 
-        visit "/merchants/:#{merchant_1.id}/items"
+        visit "/merchants/#{merchant_1.id}/items"
 
         within "#items-#{item_1.id}" do
         expect(page).to have_content("Basket Ball")
