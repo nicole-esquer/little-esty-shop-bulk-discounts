@@ -7,6 +7,9 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
 
+  def items
+  end
+
   def new
   end
 
