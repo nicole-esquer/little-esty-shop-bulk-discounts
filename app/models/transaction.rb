@@ -3,5 +3,5 @@ class Transaction < ApplicationRecord
   
   enum result: { success: 0, failed: 1 }
 
-  validates_presence_of :invoice_id, :credit_card_number, :credit_card_expiration_date, :result, :created_at, :updated_at
+  validates_presence_of :invoice_id, :credit_card_number, :result
 end
