@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   resources :merchants, except: [:show]
 
   get "/admin/", to: "admin/dashboard#index", as: :admin_dashboard
-
+  
+  namespace :admin do
+    resources :merchants, :invoices
+  end
 end
 
 
