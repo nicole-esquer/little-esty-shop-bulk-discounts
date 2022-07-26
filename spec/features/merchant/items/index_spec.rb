@@ -25,6 +25,9 @@ RSpec.describe "merchants items index page", type: :feature do
 
         visit "/merchants/#{merchant_1.id}/items"
 
+        save_and_open_page
+        
+
         within "#items-#{item_1.id}" do
         expect(page).to have_content("Basket Ball")
         expect(page).to_not have_content("Jersey")
