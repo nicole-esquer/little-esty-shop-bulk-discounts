@@ -1,5 +1,5 @@
 class Invoice < ApplicationRecord
-  belongs_to :customers
+  belongs_to :customer
 
-  validates_presence_of :customers_id, :status
+  #validates_presence_of :customer_id, :status
 end
