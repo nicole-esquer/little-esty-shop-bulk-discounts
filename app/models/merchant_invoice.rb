@@ -1,6 +1,4 @@
 class MerchantInvoice < ApplicationRecord
-  belongs_to :merchants
-  belongs_to :invoices
-
-  validates_presence_of :merchants_id, :invoices_id
+  belongs_to :merchant
+  belongs_to :invoice
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_26_014851) do
+ActiveRecord::Schema.define(version: 2022_07_26_153331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 2022_07_26_014851) do
     t.bigint "item_id"
     t.bigint "invoice_id"
     t.integer "quantity"
-    t.decimal "unit_price"
-    t.string "status"
+    t.integer "unit_price"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2022_07_26_014851) do
 
   create_table "invoices", force: :cascade do |t|
     t.bigint "customer_id"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_invoices_on_customer_id"
@@ -46,19 +46,19 @@ ActiveRecord::Schema.define(version: 2022_07_26_014851) do
     t.bigint "merchant_id"
     t.string "name"
     t.string "description"
-    t.decimal "unit_price"
+    t.integer "unit_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
 
   create_table "merchant_invoices", force: :cascade do |t|
-    t.bigint "merchants_id"
-    t.bigint "invoices_id"
+    t.bigint "merchant_id"
+    t.bigint "invoice_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["invoices_id"], name: "index_merchant_invoices_on_invoices_id"
-    t.index ["merchants_id"], name: "index_merchant_invoices_on_merchants_id"
+    t.index ["invoice_id"], name: "index_merchant_invoices_on_invoice_id"
+    t.index ["merchant_id"], name: "index_merchant_invoices_on_merchant_id"
   end
 
   create_table "merchants", force: :cascade do |t|
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2022_07_26_014851) do
     t.bigint "invoice_id"
     t.bigint "credit_card_number"
     t.datetime "credit_card_expiration_date"
-    t.string "result"
+    t.integer "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invoice_id"], name: "index_transactions_on_invoice_id"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 2022_07_26_014851) do
   add_foreign_key "invoice_items", "items"
   add_foreign_key "invoices", "customers"
   add_foreign_key "items", "merchants"
-  add_foreign_key "merchant_invoices", "invoices", column: "invoices_id"
-  add_foreign_key "merchant_invoices", "merchants", column: "merchants_id"
+  add_foreign_key "merchant_invoices", "invoices"
+  add_foreign_key "merchant_invoices", "merchants"
   add_foreign_key "transactions", "invoices"
 end
