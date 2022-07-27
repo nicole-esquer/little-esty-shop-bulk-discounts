@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Merchant Item Show Page", type: :view do
+RSpec.describe "Merchant Item Show Page", type: :feature do
     it 'diplays item attributes name description selling price' do
         merchant_1 = Merchant.create!(name: "Micheal Jordan")
         merchant_2 = Merchant.create!(name: "Kobe Bryant")
@@ -26,10 +26,11 @@ RSpec.describe "Merchant Item Show Page", type: :view do
 
         click_link("Basket Ball")
 
-        expect(page).to have_current_path("/merchants/#{merchant_1.id}/items/item_id")
+        expect(page).to have_current_path("/merchants/#{merchant_1.id}/items/#{item_1.id}")
         expect(page).to have_content("Basket Ball")
-        expect(page).to have_content("Wilson 29 in orange ball")
-        expect(page).to have_content(45000)
+        expect(page).to have_content("Description: Wilson 29 in orange ball")
+        expect(page).to have_content("Price: 45000")
+        expect(page).to_not have_content("Kobe Bryant")
     end
 end
 
