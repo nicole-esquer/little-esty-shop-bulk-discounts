@@ -1,16 +1,17 @@
 class Merchant < ApplicationRecord
-  # has_many :merchant_invoices
-
   has_many :items
-  
-  has_many :invoices
   has_many :invoice_items, through: :items
-  has_many :customers, through: :invoices
+  has_many :invoices, through: :items, source: :invoice_items
+  has_many :customers, through: :invoice_items, source: :invoice
+  has_many :transactions, through: :invoices
   
   validates_presence_of :name
 
   def top_five_customers
-    customers.joins(:invoices, :transactions).where(transactions: {result: "success"}).order(customers.num_successful_transactions).limit(5)
+    # top five customers by number of successful transactions
+    # customers who have conducted the most successful transactions
+    customers.joins(:transactions).where(transactions: { result: :success }).group(:id).order("count(transactions.id) desc").limit(5)
+
   end
 end
 
