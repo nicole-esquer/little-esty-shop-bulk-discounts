@@ -32,6 +32,8 @@ class ItemsController < ApplicationController
   end
 
   def update
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.find(params[:id])
     respond_to do |format|
       if @item.update(item_params)
         format.html { redirect_to merchant_items_url(@merchant), notice: "Information has been successfully updated!" }
