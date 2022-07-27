@@ -5,5 +5,8 @@
   <%= @merchant.name %>
 </p>
 
-<%= link_to 'Edit', edit_merchant_path(@merchant) %> |
-<%= link_to 'Back', merchants_path %>
+<%= link_to 'Items', merchant_items_path(@merchant) %>
+<%= link_to 'Invoices', merchant_invoice_path(@merchant) %>
+
+<br>
+<br>

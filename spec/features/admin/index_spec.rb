@@ -20,4 +20,5 @@ RSpec.describe 'admin dashboard' do
 
       expect(current_path).to eq(admin_invoices_path)
    end
+   
 end
