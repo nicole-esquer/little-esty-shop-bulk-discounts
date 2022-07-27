@@ -1,6 +1,6 @@
 class MerchantsController < ApplicationController
   def index
-    @merchants = Merchant.all
+    @merchant = Merchant.all
   end
 
   def show
