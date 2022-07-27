@@ -5,6 +5,8 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoice_items, source: :invoice
   has_many :transactions, through: :invoices
   
+  has_many :invoices, through: :merchant_invoices
+  
   validates_presence_of :name
 
   def top_five_customers
