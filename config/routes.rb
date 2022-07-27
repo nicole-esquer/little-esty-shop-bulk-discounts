@@ -7,11 +7,10 @@ Rails.application.routes.draw do
     resources :invoices
     resources :customers
   end
-  
+
+  resources :items
   resources :transactions
   resources :invoice_items
-  get "/merchants/:id/items", to: "merchant_items#index"
-  get "/merchants/:id/items/:id", to: "merchant_items#show"
   
   get "/admin/", to: "admin/dashboard#index", as: :admin_dashboard
   
