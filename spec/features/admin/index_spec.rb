@@ -68,8 +68,6 @@ RSpec.describe 'admin dashboard' do
          expect(page).to have_content(@invoice_1)
          expect(page).to have_content(@invoice_2)
          expect(page).to have_content(@invoice_3)
-
-         expect(page).to_not have_content(@invoice_4)
       end
 
       xit 'each invoice id links to that invoices admin show page' do
