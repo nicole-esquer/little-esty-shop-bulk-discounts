@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :customers
   resources :transactions
   resources :invoice_items
-  resources :item_merchants
+  resources :merchant_items
   resources :merchant_invoice 
   
   get "/admin/", to: "admin/dashboard#index", as: :admin_dashboard
