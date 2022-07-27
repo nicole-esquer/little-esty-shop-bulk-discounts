@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
+  
   get "/merchants/:id/dashboard", to: "merchants#show", as: :merchant_dashboard
-  resources :merchants, except: [:show]
-  get "/merchants/:id/items", to: "merchants#items", as: :merchant_items
-  resources :items
-  resources :invoices
-  resources :customers
+  
+  resources :merchants, except: [:show] do
+    resources :items
+    resources :invoices
+    resources :customers
+  end
+  
   resources :transactions
   resources :invoice_items
-  resources :merchant_items
-  resources :merchant_invoice 
+  get "/merchants/:id/items", to: "merchant_items#index"
+  get "/merchants/:id/items/:id", to: "merchant_items#show"
   
   get "/admin/", to: "admin/dashboard#index", as: :admin_dashboard
   

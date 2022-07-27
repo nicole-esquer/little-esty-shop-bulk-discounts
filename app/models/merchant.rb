@@ -1,10 +1,14 @@
 class Merchant < ApplicationRecord
   has_many :items
-  has_many :merchant_invoices
-  has_many :invoices, through: :merchant_invoices
-  has_many :customers, through: :invoices
+
+  has_and_belongs_to_many :invoices
+
+  has_many :invoice_items, through: :items
+  has_many :customers, through: :invoices, source: :invoices_merchants
   
   validates_presence_of :name
+
+
 end
 
 # As a merchant and I 
