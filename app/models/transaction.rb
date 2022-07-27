@@ -5,7 +5,7 @@ class Transaction < ApplicationRecord
 
   has_many :invoice_items, through: :invoice
   has_many :items, through: :invoice_items
-  has_many :merchants, through: :invoices, source: :items
+  has_many :merchants, through: :invoice, source: :items
   
   enum result: { success: 0, failed: 1 }
 
