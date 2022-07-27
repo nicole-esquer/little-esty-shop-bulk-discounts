@@ -53,20 +53,20 @@ RSpec.describe 'admin dashboard' do
          sally = Customer.create!(first_name: "Sally", last_name: "Sunshine")
          henry = Customer.create!(first_name: "Henry", last_name: "Hill")
 
-         invoice_1 = sally.invoices.create!(status: "In Progress")
-         invoice_2 = sally.invoices.create!(status: "In Progress")
-         invoice_3 = sally.invoices.create!(status: "In Progress")
-         invoice_4 = henry.invoices.create!(status: "Completed")
+         invoice_1 = sally.invoices.create!(status: 1)
+         invoice_2 = sally.invoices.create!(status: 1)
+         invoice_3 = sally.invoices.create!(status: 1)
+         invoice_4 = henry.invoices.create!(status: 2)
 
          visit '/admin'
 
          expect(page).to have_content("Incomplete Invoices")
    
-         expect(page).to have_content(@invoice_1.id)
-         expect(page).to have_content(@invoice_2.id)
-         expect(page).to have_content(@invoice_3.id)
-         
-         expect(page).to_not have_content(@invoice_3.id)
+         expect(page).to have_content(@invoice_1)
+         expect(page).to have_content(@invoice_2)
+         expect(page).to have_content(@invoice_3)
+
+         expect(page).to_not have_content(@invoice_4)
       end
 
       xit 'each invoice id links to that invoices admin show page' do
