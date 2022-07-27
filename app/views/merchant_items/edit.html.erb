@@ -1,2 +1,14 @@
-<h1>Merchant#edit</h1>
-<p>Find me in app/views/merchant/edit.html.erb</p>
+<h1>Merchant#edit</h1>                          
+<%= form_with url: "/merchants/#{@merchant.id}/items/#{@item.id}/edit", method: :patch, local: true do |f| %>
+  <%= f.label :name %>
+   <%= f.text_field :name, :value => @item.name %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.label :price %>
+  <%= f.number_field :price %>
+
+  <%= f.submit %>
+<% end %>
+
