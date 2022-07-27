@@ -15,8 +15,9 @@ class MerchantItemsController < ApplicationController
     end
 
   def update
-    item = Item.find(params[:id])
-    if item.update(item_params)
+    @merchant = Merchant.find(params[:merchant_id])
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
       redirect_to "/merchants/#{@merchant.id}/items/#{@item.id}"
       flash[:alert] = "Information has been successfully updated!"
     else
@@ -24,4 +25,10 @@ class MerchantItemsController < ApplicationController
     #   flash[:alert] = "Error: #{error_message(item.errors)}"
     end
   end
+
+    private
+
+    def item_params
+        params.permit(:name, :description, :unit_price)
+    end
 end
