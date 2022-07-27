@@ -22,10 +22,10 @@ RSpec.describe "merchants show page", type: :feature do
     
     it "has a link to the merchants invoices" do
       merchant = Merchant.create!(name: "Joe")
-      
+
       visit "/merchants/#{merchant.id}/dashboard"
 
-      expect(page).to have_content("Invoices")
+      expect(page).to have_link("Invoices")
     end
   end
 
