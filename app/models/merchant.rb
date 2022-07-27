@@ -10,7 +10,17 @@ class Merchant < ApplicationRecord
   def top_five_customers
     customers.joins(:invoices).where(transactions: { result: :success}).limit(5)
   end
+
+  def items_ready_to_ship
+    invoice_items.where(status: :packaged)
+  end
 end
+
+# section for "Items Ready to Ship"
+# a list of the names of all of my items
+# ordered and have not yet been shipped,
+# And next to each Item I see the id of the invoice that ordered my item
+# And each invoice id is a link to my merchant's invoice show page
 
 # As a merchant  I 
 # visit my merchant dashboard
