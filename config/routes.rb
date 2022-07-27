@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get "/merchants/:id/dashboard", to: "merchants#show", as: :merchant_dashboard
+  # get "/merchants/:id/dashboard", to: "merchants#show", as: :merchant_dashboard
+  get "/merchants/:merchant_id/items", to: "merchant_items#index"
+  get "/merchants/:merchant_id/items/:id", to: "merchant_items#show"
   resources :merchants, except: [:show]
 
   get "/merchants/:id/items", to: "merchants#items", as: :merchant_items
