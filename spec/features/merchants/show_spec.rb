@@ -28,3 +28,5 @@ RSpec.describe "merchants show page", type: :feature do
       expect(page).to have_link("Invoices")
     end
   end
+
+end

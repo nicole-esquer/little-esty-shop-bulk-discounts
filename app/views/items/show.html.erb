@@ -1,12 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Merchant:</strong>
-  <%= @item.merchant %>
-</p>
-
-<p>
-  <strong>Name:</strong>
+  <strong>Item Name:</strong>
   <%= @item.name %>
 </p>
 
@@ -16,9 +11,9 @@
 </p>
 
 <p>
-  <strong>Unit price:</strong>
+  <strong>Price:</strong>
   <%= @item.unit_price %>
 </p>
 
-<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Update', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>
