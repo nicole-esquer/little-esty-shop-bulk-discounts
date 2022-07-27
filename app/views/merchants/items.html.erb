@@ -1,9 +1,0 @@
-<h1>Merchant Items Show Page </h1>
-
-<% @merchant.items.each do |item| %>
-  <div id="items-<%= item.id %>">
-  <p>Name: <%= item.name %> </p>
-  <p>Description: <%= item.description %> </p>
-  <p>Price: <%= item.unit_price %> </p>
-  </div>
-<% end %>

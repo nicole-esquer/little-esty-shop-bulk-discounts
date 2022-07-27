@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
-  # get "/merchants/:id/dashboard", to: "merchants#show", as: :merchant_dashboard
-  get "/merchants/:merchant_id/items", to: "merchant_items#index"
-  get "/merchants/:merchant_id/items/:id", to: "merchant_items#show"
-  resources :merchants, except: [:show]
+  
+  get "/merchants/:id/dashboard", to: "merchants#show", as: :merchant_dashboard
+  
+  resources :merchants, except: [:show] do
+    resources :items
+    resources :invoices
+    resources :customers
+  end
 
-  get "/merchants/:id/items", to: "merchants#items", as: :merchant_items
   resources :items
-  resources :invoices
-  resources :customers
   resources :transactions
   resources :invoice_items
-  resources :item_merchants
-  resources :merchant_invoice 
   
   get "/admin/", to: "admin/dashboard#index", as: :admin_dashboard
   
@@ -20,6 +19,3 @@ Rails.application.routes.draw do
   end
 
 end
-
-
-  

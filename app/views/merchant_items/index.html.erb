@@ -1,7 +1,0 @@
-<h1>Merchant Items Index Page </h1>
-
-<% @merchant.items.each do |item| %>
-  <div id="items-<%= item.id %>">
-  <p>Name: <%=link_to item.name,"/merchants/#{@merchant.id}/items/#{item.id}" %> </p>
-  </div>
-<% end %>
