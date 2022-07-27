@@ -8,10 +8,7 @@ class Merchant < ApplicationRecord
   validates_presence_of :name
 
   def top_five_customers
-    # top five customers by number of successful transactions
-    # customers who have conducted the most successful transactions
-    customers.joins(:transactions).where(transactions: { result: :success }).group(:id).order("count(transactions.id) desc").limit(5)
-
+    customers.joins(:invoices).where(transactions: { result: :success}).limit(5)
   end
 end
 
