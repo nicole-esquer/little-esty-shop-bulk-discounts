@@ -9,5 +9,4 @@ Rails.application.routes.draw do
   resources :invoice_items
   resources :item_merchants
   resources :merchant_invoices
-
 end
