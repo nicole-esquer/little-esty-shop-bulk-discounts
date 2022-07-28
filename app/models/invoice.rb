@@ -13,4 +13,8 @@ class Invoice < ApplicationRecord
   def self.incomplete_invoices
     Invoice.joins(:invoice_items).where.not(invoice_items: {status: 2}).group(:id).select('invoices.*').order(created_at: :asc).limit(5)
   end
+
+  top_five_customers
+    customers.joins(:invoices).where(transactions: { result: :success}).limit(5)
+  end
 end

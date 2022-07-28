@@ -67,7 +67,15 @@ RSpec.describe 'admin dashboard' do
          expect(page).to have_content(@invoice_3)
       end
 
-      xit 'each invoice id links to that invoices admin show page' do
+      it 'invoices are sorted by least recent' do
+         sally = Customer.create!(first_name: "Sally", last_name: "Sunshine")
+
+         invoice_1 = sally.invoices.create!(status: 1)
+         invoice_2 = sally.invoices.create!(status: 1)
+         invoice_3 = sally.invoices.create!(status: 1)
+         
+         visit '/admin'  
+
    
       end
    end

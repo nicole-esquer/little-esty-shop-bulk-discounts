@@ -5,6 +5,7 @@
 
 <h3>Top 5 Customers</h3>
 
+
 <h3>Incomplete Invoices</h3>
 <% @invoices.incomplete_invoices.each do |invoice| %>
    <p>Invoice: <%=link_to "#{invoice.id}", admin_invoice_path(invoice.id) %></p>
