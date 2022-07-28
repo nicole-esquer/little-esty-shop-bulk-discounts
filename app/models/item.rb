@@ -7,4 +7,8 @@ class Item < ApplicationRecord
   has_many :customers, through: :invoices
  
   validates_presence_of :merchant_id, :name, :description, :unit_price
+
+  def enabled
+    invoice_items.where(status: :pending)
+  end
 end
