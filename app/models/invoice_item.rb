@@ -11,9 +11,9 @@ class InvoiceItem < ApplicationRecord
   validates_presence_of :item_id, :invoice_id, :quantity, :unit_price
   validates :status, inclusion: { in: ["packaged", "pending", "shipped"] }
 
-  def format_date
-    created_at.strftime("%A, %B %d, %Y")
-  end
+  # def format_date
+  #   created_at.strftime("%A, %B %d, %Y")
+  # end
 
   # def enabled
   #   where(status: :pending).distinct(:item_id)
