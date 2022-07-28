@@ -23,7 +23,7 @@ RSpec.describe "merchants items index page", type: :feature do
             description: "Size L stain resistant jersey", 
             unit_price: 20000, merchant_id: merchant_2.id)
 
-        visit "/merchants/#{merchant_1.id}/items"
+        visit merchant_items_path(merchant_1)
 
         within "#items-#{item_1.id}" do
         expect(page).to have_content("Basket Ball")
@@ -57,7 +57,7 @@ RSpec.describe "merchants items index page", type: :feature do
             description: "Size L stain resistant jersey", 
             unit_price: 20000, merchant_id: merchant_2.id)
 
-        visit "/merchants/#{merchant_1.id}/items"
+        visit merchant_items_path(merchant_1)
 
         expect(page).to have_link("Basket Ball")
         expect(page).to have_link("Jordans")
@@ -118,7 +118,7 @@ RSpec.describe "merchants items index page", type: :feature do
             description: "High quality size 11 athletic shoes", 
             unit_price: 45000, merchant_id: merchant_1.id)
 
-        visit "/merchants/#{merchant_1.id}/items"
+        visit merchant_items_path(merchant_1)
 
         expect(page).to have_content("Enabled Items")
         expect(page).to have_content("Disabled Items")
