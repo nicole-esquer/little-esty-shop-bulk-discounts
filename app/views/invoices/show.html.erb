@@ -20,6 +20,11 @@
   <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %>
 </p>
 
+<p>
+  <strong>Total Revenue:</strong>
+  $<%= @invoice.total_revenue %>
+</p>
+
 <br>
 
 <h3>Items:</h3>
@@ -41,7 +46,10 @@
         <td><%= inv_item.item.name %></td>
         <td><%= inv_item.quantity %></td>
         <td><%= inv_item.unit_price %></td>
-        <td><%= inv_item.status %></td>
+        <%= form_with(model: inv_item, local: true) do |form| %>
+          <td><%= form.select :status, options_for_select(InvoiceItem.statuses.keys, inv_item.status) %>
+          <%= form.submit "Update Item Status" %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
