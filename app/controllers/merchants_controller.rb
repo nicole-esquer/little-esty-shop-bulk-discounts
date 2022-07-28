@@ -1,4 +1,6 @@
 class MerchantsController < ApplicationController
+  include ApplicationHelper
+  
   def index
     @merchants = Merchant.all
   end

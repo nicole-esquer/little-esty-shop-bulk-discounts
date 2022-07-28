@@ -1,10 +1,11 @@
 class ItemsController < ApplicationController
   include ApplicationHelper
-  
+
   def index
     @items = Item.all
     @merchant = Merchant.find(params[:merchant_id])
     @enabled_items = Item.enabled
+    @disabled_items = !Item.enabled
   end
 
   def show
