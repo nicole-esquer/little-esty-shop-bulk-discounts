@@ -12,14 +12,16 @@
     <th>Description</th>
     <th>Price</th>
     <th>Quantity</th>
+    <th>Date Created</th>
     <th>Ship</th>
   </tr>
-  <% @merchant.items_ready_to_ship.each do |inv_item| %>
+  <% @merchant.items_ready_to_ship.created_at_desc.each do |inv_item| %>
     <tr>
       <td><%= link_to inv_item.item.name, item_path(inv_item.item_id) %></td>
       <td><%= link_to inv_item.invoice_id, merchant_invoice_path(@merchant.id) %></td>
       <td><%= inv_item.unit_price %></td>
       <td><%= inv_item.quantity %></td>
+      <td><%= inv_item.format_date %></td>
       <td><%= link_to 'Ship' %></td>
     </tr>
   <% end %>
@@ -29,7 +31,7 @@
 <br>
 
 <%= link_to 'Items', merchant_items_path(@merchant) %>
-<%= link_to 'Invoices', merchant_invoice_path(@merchant) %>
+<%= link_to 'Invoices', merchant_invoices_path(@merchant) %>
 
 <br>
 <br>

@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   resources :invoice_items
   
   get "/admin/", to: "admin/dashboard#index", as: :admin_dashboard
-  
-  namespace :admin do
-    resources :merchants, :invoices
-  end
 
+  namespace :admin do
+    resources :merchants, only: [:index, :show]
+    resources :invoices, only: [:index, :show]
+  end
 end

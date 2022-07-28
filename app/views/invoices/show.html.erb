@@ -1,13 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Customers:</strong>
-  <%= @invoice.customers %>
+  <strong>Invoice ID:</strong>
+  <%= @invoice.id %>
 </p>
 
 <p>
   <strong>Status:</strong>
   <%= @invoice.status %>
+</p>
+
+<p>
+  <strong>Created At:</strong>
+  <%= @invoice.created_at.format_date %>
 </p>
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
