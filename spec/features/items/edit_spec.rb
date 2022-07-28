@@ -37,7 +37,6 @@ RSpec.describe "can update merchant item info", type: :feature do
         expect(find('form')).to have_content('Price')
         # expect(page).to have_content('Basketball')
         expect(find('form')).to_not have_content('Jersey')
-
     end
 
     it 'redirects back to show page with updated info' do
