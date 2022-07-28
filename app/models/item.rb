@@ -8,7 +8,7 @@ class Item < ApplicationRecord
  
   validates_presence_of :merchant_id, :name, :description, :unit_price
 
-  def enabled
-    invoice_items.where(status: :pending)
+  def self.enabled
+    joins(:invoice_items).where(invoice_items: { status: :pending }).distinct(:item_id).order(id: :asc)
   end
 end

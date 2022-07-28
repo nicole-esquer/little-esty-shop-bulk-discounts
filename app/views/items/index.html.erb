@@ -15,15 +15,15 @@
   </thead>
 
   <tbody>
-    <% @merchant.items.each do |item| %>
+    <% @enabled_items.each do |item| %>
       <tr>
-        <td><%= item.id %></td>
-        <td><%= link_to item.name, item_path(item) %></td>
-        <td><%= item.description %></td>
-        <td><%= item.unit_price %></td>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= item.id %></td>
+          <td><%= link_to item.name, item_path(item) %></td>
+          <td><%= item.description %></td>
+          <td><%= item.unit_price %></td>
+          <td><%= link_to 'Show', item %></td>
+          <td><%= link_to 'Edit', edit_item_path(item) %></td>
+          <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

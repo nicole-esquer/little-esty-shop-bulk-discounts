@@ -14,4 +14,8 @@ class InvoiceItem < ApplicationRecord
   def format_date
     created_at.strftime("%A, %B %d, %Y")
   end
+
+  # def enabled
+  #   where(status: :pending).distinct(:item_id)
+  # end
 end
