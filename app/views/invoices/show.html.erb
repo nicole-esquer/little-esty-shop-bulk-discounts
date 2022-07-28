@@ -46,7 +46,9 @@
         <td><%= inv_item.item.name %></td>
         <td><%= inv_item.quantity %></td>
         <td><%= inv_item.unit_price %></td>
-
+        <%= form_with(model: inv_item, local: true) do |form| %>
+          <td><%= form.select :status, options_for_select(InvoiceItem.statuses.keys, inv_item.status) %><%= form.submit "Update Item Status", edit_invoice_item_path(inv_item) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
