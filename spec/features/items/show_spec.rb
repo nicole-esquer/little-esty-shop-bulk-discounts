@@ -34,3 +34,4 @@ RSpec.describe "Merchant Item Show Page", type: :feature do
     end
 
 end
+
