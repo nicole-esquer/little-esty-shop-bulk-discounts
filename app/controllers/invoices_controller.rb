@@ -8,11 +8,11 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @invoice_items = @invoice.invoice_items
   end
-
+  
   def new
     @invoice = Invoice.new
   end
-
+  
   def edit
   end
 

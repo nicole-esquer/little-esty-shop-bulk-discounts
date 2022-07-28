@@ -4,6 +4,8 @@ class InvoiceItemsController < ApplicationController
   end
 
   def show
+    @invoice = Invoice.find(params[:id])
+    @options = InvoiceItem.statuses.keys
   end
 
   def new
@@ -11,6 +13,8 @@ class InvoiceItemsController < ApplicationController
   end
 
   def edit
+    @invoice = Invoice.find(params[:id])
+    @options = InvoiceItem.statuses.keys
   end
 
   def create
