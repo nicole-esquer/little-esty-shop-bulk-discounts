@@ -6,9 +6,8 @@ class Customer < ApplicationRecord
   has_many :merchants, through: :invoices
 
   validates_presence_of :first_name, :last_name
-  
+
   def successful_transactions
-    joins(:invoices, :transactions, as: :transactions_count).where(transactions: {result: :success}).group(:id).order(:transactions_count).limit(5)
-    joins(:invoices, :transactions).select(:customers).where(transactions: {result: :success}).group(:customers).order(:transactions).limit(5)
+    where(invoices: {status: :completed}, transactions: {result: :success})
   end
 end

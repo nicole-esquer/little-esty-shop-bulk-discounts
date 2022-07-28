@@ -4,6 +4,9 @@ class InvoiceItemsController < ApplicationController
   end
 
   def show
+    @invoice_item = InvoiceItem.find(params[:id])
+    @invoice = Invoice.find(params[:id])
+    @options = InvoiceItem.statuses.keys
   end
 
   def new
@@ -11,6 +14,8 @@ class InvoiceItemsController < ApplicationController
   end
 
   def edit
+    @invoice = Invoice.find(params[:id])
+    @options = InvoiceItem.statuses.keys
   end
 
   def create
@@ -26,6 +31,7 @@ class InvoiceItemsController < ApplicationController
   end
 
   def update
+    @invoice_item = InvoiceItem.find(params[:id])
     respond_to do |format|
       if @invoice_item.update(invoice_item_params)
         format.html { redirect_to invoice_item_url(@invoice_item), notice: "Invoice item was successfully updated." }
