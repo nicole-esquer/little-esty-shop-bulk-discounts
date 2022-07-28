@@ -34,7 +34,7 @@ RSpec.describe "can update merchant item info", type: :feature do
         save_and_open_page
         expect(find('form')).to have_content('Name')
         expect(find('form')).to have_content('Description')
-        expect(find('form')).to have_content('Price')
+        expect(find('form')).to have_content('Unit price')
         # expect(page).to have_content('Basketball')
         expect(find('form')).to_not have_content('Jersey')
     end
@@ -58,7 +58,7 @@ RSpec.describe "can update merchant item info", type: :feature do
 
 
         save_and_open_page
-        click_on 'save'
+        click_on 'Save'
 
         expect(page).to have_current_path("/merchants/#{merchant_2.id}/items/#{item_3.id}")
         expect(page).to have_content('Kid Ball')
