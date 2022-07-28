@@ -20,9 +20,6 @@ RSpec.describe 'admin dashboard' do
 
       expect(current_path).to eq(admin_invoices_path)
    end
-<<<<<<< HEAD
-   
-=======
 
    describe 'dashboard statistics - top customers' do
       xit 'displays the names of the top 5 customers' do
@@ -74,5 +71,4 @@ RSpec.describe 'admin dashboard' do
    
       end
    end
->>>>>>> 8cbcd55f0b24531884d08464209249d9570c3abf
 end
