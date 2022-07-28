@@ -14,16 +14,16 @@ class Invoice < ApplicationRecord
     Invoice.joins(:invoice_items).where.not(invoice_items: {status: 2}).group(:id).select('invoices.*').order(created_at: :asc).limit(5)
   end
 
-<<<<<<< HEAD
-  top_five_customers
+  def top_five_customers
     customers.joins(:invoices).where(transactions: { result: :success}).limit(5)
-=======
-  def format_date
+  end
+
+   def format_date
     created_at.strftime("%A, %B %d, %Y")
   end
 
   def total_revenue
     invoice_items.sum("quantity * unit_price") / 100.0
->>>>>>> d29b03f5b4ed5f4f428a88d67a787405e8b7962f
   end
 end
+

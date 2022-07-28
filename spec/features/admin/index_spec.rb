@@ -62,9 +62,9 @@ RSpec.describe 'admin dashboard' do
 
          expect(page).to have_content("Incomplete Invoices")
    
-         expect(page).to have_content(@invoice_1)
-         expect(page).to have_content(@invoice_2)
-         expect(page).to have_content(@invoice_3)
+         expect(page).to have_content(invoice_1)
+         expect(page).to have_content(invoice_2)
+         expect(page).to have_content(invoice_3)
       end
 
       it 'invoices are sorted by least recent' do
@@ -76,7 +76,9 @@ RSpec.describe 'admin dashboard' do
          
          visit '/admin'  
 
-   
+         expect(page).to have_content(invoice3.created_at.strftime('%A %B%e %Y'))
+         expect(page).to have_content(invoice2.created_at.strftime('%A %B%e %Y'))
+         expect(page).to have_content(invoice1.created_at.strftime('%A %B%e %Y'))
       end
    end
 end
