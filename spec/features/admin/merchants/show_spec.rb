@@ -8,7 +8,7 @@ RSpec.describe 'Admin Merchant Show Page' do
 
     click_on merchant.name
 
-    expect(current_path).to eq("/admin/merchants/merchant_id")
+    expect(current_path).to eq("/admin/merchants/#{merchant.id}")
   end
   it "can see a link to update the merchants information" do
       merchant = Merchant.create!(name: "The Gibson Project")
@@ -22,7 +22,6 @@ RSpec.describe 'Admin Merchant Show Page' do
 
       #click_on("Save Update")
 
-      save_and_open_page
       expect("/admin/merchants/#{merchant.id}")
       expect(page).to have_content("Bob's Burgs")
     end

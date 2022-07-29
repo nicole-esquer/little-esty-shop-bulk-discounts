@@ -4,7 +4,7 @@ class Admin::MerchantsController < ApplicationController
    end
 
    def show
-     @merchants = Merchant.find(params[:id])
+     @merchants = Merchant.find(params[:merchant_id])
    end
 
    def edit
@@ -13,11 +13,16 @@ class Admin::MerchantsController < ApplicationController
 
    def update
      @merchant = Merchant.find(params[:id])
-     if merchant.update(merchant_params)
-      redirect_to "/merchants/#{merchant.id}"
+     if merchant.update(admin_merchant_params)
+      redirect_to "/admin/merchants/#{merchant.id}"
     else
-      redirect_to "/merchants/#{merchant.id}/edit"
+      redirect_to "/admin/merchants/#{merchant.id}/edit"
       flash[:alert] = "Error: #{error_message(merchant.errors)}"
     end
    end
-end
+
+   private
+     def admin_merchant_params
+       params.require(:merchant).permit(:name)
+     end
+ end
