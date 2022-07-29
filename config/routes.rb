@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   
   get "/merchants/:id/dashboard", to: "merchants#show", as: :merchant_dashboard
+  post "/merchants/:id/items/:item_id", to: "items#change_status", as: :change_status_item
   
   resources :merchants, except: [:show] do
-    resources :items
+    resources :items, except: [:edit]
     resources :invoices
     resources :customers
   end

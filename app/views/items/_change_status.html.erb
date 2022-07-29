@@ -1,0 +1,3 @@
+<%= form_with(model: item, local: true) do |f| %>
+  <td><%= f.submit "Enable/Disable Item", { :controller => "items", :action => "change_status" } %></td>
+<% end %>

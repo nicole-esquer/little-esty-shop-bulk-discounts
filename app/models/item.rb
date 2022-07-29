@@ -5,22 +5,24 @@ class Item < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
+
+  scope :enabled, -> { where(status: 'enabled') }
+  scope :disabled, -> { where(status: 'disabled') }
  
+  enum status: { enabled: 0, disabled: 1 } 
+  
   validates_presence_of :merchant_id, :name, :description, :unit_price
+  validates :status, inclusion: { in: ["enabled", "disabled"] }
+  # after_event :update_status
 
-  enum status: { enabled: 0, disabled: 1 } do
-    event :disable do
-      transition enabled: :disabled
+  private
+    def update_status
+      if item.status == 'enabled' 
+        item.status = 'disabled'
+      else
+        item.status = 'enabled'
+      end
     end
-    event :enable do
-      transition disabled: :enabled
-    end
-  end
-
-  <%= form_with(model: inv_item, local: true) do |form| %>
-    <td><%= form.select :status, options_for_select(InvoiceItem.statuses.keys, inv_item.status) %>
-    <%= form.submit "Update Item Status" %></td>
-  <% end %>
 
   # validates :status, inclusion: { in: ["enabled", "disabled"] }
 end
