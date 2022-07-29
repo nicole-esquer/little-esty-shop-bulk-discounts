@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  
+  root 'merchants/dashboard#show'
+
   get "/merchants/:merchant_id/dashboard", to: "merchants/dashboard#show", as: :merchant_dashboard
   post "/merchants/:merchant_id/items/", to: "merchants/items#change_status"
   
