@@ -5,9 +5,6 @@ class Item < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
-
-  scope :enabled, -> { where(status: 'enabled') }
-  scope :disabled, -> { where(status: 'disabled') }
  
   enum status: { enabled: 0, disabled: 1 } 
   
@@ -15,12 +12,22 @@ class Item < ApplicationRecord
   validates :status, inclusion: { in: ["enabled", "disabled"] }
   # after_event :update_status
 
-  private
-    def update_status
+  def self.enabled_items(id)
+    where(merchant_id: id, status: "enabled")
+  end
+
+  def self.disabled_items(id)
+    where(merchant_id: id, status: "disabled")
+  end
+
+  
+    def update_status(item)
       if item.status == 'enabled' 
         item.status = 'disabled'
+        item.save
       else
         item.status = 'enabled'
+        item.save
       end
     end
 

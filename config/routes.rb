@@ -1,18 +1,15 @@
 Rails.application.routes.draw do
   
-  get "/merchants/:id/dashboard", to: "merchants#show", as: :merchant_dashboard
-  post "/merchants/:id/items/:item_id", to: "items#change_status", as: :change_status_item
+  get "/merchants/:merchant_id/dashboard", to: "merchants/dashboard#show", as: :merchant_dashboard
+  post "/merchants/:merchant_id/items/", to: "merchants/items#change_status"
+  # post "/merchants/:merchant_id/invoices/:id", to: "merchants/invoices#update"
   
-  resources :merchants, except: [:show] do
-    resources :items, except: [:edit]
-    resources :invoices
-    resources :customers
+  namespace :merchants do
+    scope '/:id', only: [:show] do
+      resources :items, only: [:index, :show, :edit, :update]
+      resources :invoices, only: [:index, :show, :edit, :update]
+    end
   end
-
-  resources :items
-  resources :invoices
-  resources :transactions
-  resources :invoice_items
   
   get "/admin/", to: "admin/dashboard#index", as: :admin_dashboard
 

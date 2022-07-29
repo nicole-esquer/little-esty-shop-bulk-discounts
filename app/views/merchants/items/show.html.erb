@@ -12,8 +12,6 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @item.unit_price %>
+  <%= format_price(@item.unit_price) %>
 </p>
 
-<%= link_to 'Update', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>

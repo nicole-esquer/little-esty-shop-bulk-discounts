@@ -45,9 +45,9 @@
       <tr>
         <td><%= inv_item.item.name %></td>
         <td><%= inv_item.quantity %></td>
-        <td><%= inv_item.unit_price %></td>
-        <%= form_with(model: inv_item, local: true) do |form| %>
-          <td><%= form.select :status, options_for_select(InvoiceItem.statuses.keys, inv_item.status) %>
+        <td><%= format_price(inv_item.unit_price) %></td>
+        <%= form_with(model: inv_item, url: merchants_invoice_path, method: :post, local: true) do |form| %>
+          <td><%= form.select :status, options_for_select(@options, inv_item.status) %>
           <%= form.submit "Update Item Status" %></td>
         <% end %>
       </tr>
@@ -56,8 +56,6 @@
 </table>
 <br>
 
-<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-<%= link_to 'Back', invoices_path %>
 
 <br>
 <br>
