@@ -14,12 +14,13 @@ Rails.application.routes.draw do
   resources :invoice_items
 
   get "/admin/", to: "admin/dashboard#index", as: :admin_dashboard
-  get "/admin/merchants", to: "admin/merchants#index"
-  get "/admin/invoices", to: "admin/invoices#index"
-  #namespace :admin do
-  #  resources :merchants#, only: [:index, :show, :edit, :update]
-  #  resources :invoices, only: [:index, :show]
-  get "/admin/merchants/:id/edit", to: "admin/merchants#edit"
-  get "/admin/merchants/:id", to: "admin/merchants#show"
-  patch "/admin/merchants/:id", to: "admin/merchants#update"
+  #get "/admin/merchants", to: "admin/merchants#index"
+  #get "/admin/invoices", to: "admin/invoices#index"
+  namespace :admin do
+    resources :merchants#, only: [:index, :show, :edit, :update]
+    resources :invoices, only: [:index, :show]
+  #get "/admin/merchants/:id/edit", to: "admin/merchants#edit"
+  #get "/admin/merchants/:id", to: "admin/merchants#show"
+  #patch "/admin/merchants/:id", to: "admin/merchants#update"
+end
 end

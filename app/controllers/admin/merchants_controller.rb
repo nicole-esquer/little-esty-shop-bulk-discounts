@@ -13,13 +13,10 @@ class Admin::MerchantsController < ApplicationController
 
    def update
      @merchant = Merchant.find(params[:id])
-     binding.pry
      if @merchant.update(admin_merchant_params)
-       binding.pry
-      redirect_to "/admin/merchants/#{@merchant.id}"
+        redirect_to "/admin/merchants/#{@merchant.id}"
     else
-      binding.pry
-      redirect_to "/admin/merchants/#{@merchant.id}/edit"
+       redirect_to "/admin/merchants/#{@merchant.id}/edit"
       flash[:alert] = "Error: #{error_message(@merchant.errors)}"
     end
    end
