@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Merchant Items</h1>
+<h2> Enabled Items</h2>
 
 <h2>Enabled Items</h2>
 <table>
@@ -46,9 +47,10 @@
 
   <tbody>
     <% @merchant.items.each do |item| %>
-      <tr>
+  
+      <tr id="items-<%=item.id%>">
         <td><%= item.id %></td>
-        <td><%= link_to item.name, item_path(item) %></td>
+        <td><%= link_to item.name, merchant_item_path(@merchant.id, item.id) %></td>
         <td><%= item.description %></td>
         <td><%= item.unit_price %></td>
         <td><%= link_to 'Show', item %></td>
@@ -60,5 +62,7 @@
 </table>
 
 <br>
+
+<h2> Enabled Items</h2>
 
 <%= link_to 'New Item', new_item_path %>

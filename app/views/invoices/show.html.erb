@@ -43,7 +43,7 @@
   <tbody>
     <% @invoice_items.each do |inv_item| %>
       <tr>
-        <td><%= inv_item.item.name %></td>
+        <td><%= link_to inv_item.item.name, invoice_item(inv_item) %></td>
         <td><%= inv_item.quantity %></td>
         <td><%= inv_item.unit_price %></td>
         <%= form_with(model: inv_item, local: true) do |form| %>
@@ -61,3 +61,4 @@
 
 <br>
 <br>
+ 

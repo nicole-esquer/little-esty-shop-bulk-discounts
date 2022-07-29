@@ -19,14 +19,12 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
-    @name = @item.name
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def create
     @item = Item.new(item_params)
-
     respond_to do |format|
       if @item.save
         format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
@@ -37,11 +35,10 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to merchant_items_url(@merchant), notice: "Information has been successfully updated!" }
+        format.html { redirect_to merchant_item_url(@item.merchant_id), notice: "Information has been successfully updated!" }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
