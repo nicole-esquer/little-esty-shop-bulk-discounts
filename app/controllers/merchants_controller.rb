@@ -11,6 +11,7 @@ class MerchantsController < ApplicationController
 
   def new
   end
+  #{}"/admin/merchants/#{@merchants.id}"
 
   def create
   end
