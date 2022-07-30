@@ -17,8 +17,8 @@
   </tr>
   <% @merchant.items_ready_to_ship.created_at_desc.each do |inv_item| %>
     <tr>
-      <td><%= link_to inv_item.item.name, item_path(inv_item.item_id) %></td>
-      <td><%= link_to inv_item.invoice_id, merchant_invoice_path(@merchant.id) %></td>
+      <td><%= link_to inv_item.item.name, merchants_item_path(inv_item.item.id) %></td>
+      <td><%= link_to inv_item.invoice_id, merchants_invoice_path(@merchant.id) %></td>
       <td><%= inv_item.unit_price %></td>
       <td><%= inv_item.quantity %></td>
       <td><%= format_date(inv_item.created_at) %></td>
@@ -30,8 +30,8 @@
 <br>
 <br>
 
-<%= link_to 'Items', merchant_items_path(@merchant) %>
-<%= link_to 'Invoices', merchant_invoices_path(@merchant) %>
+<%= link_to 'Items', merchants_items_path(@merchant) %>
+<%= link_to 'Invoices', merchants_invoices_path(@merchant) %>
 
 <br>
 <br>
