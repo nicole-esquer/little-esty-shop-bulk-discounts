@@ -1,9 +1,6 @@
-<h1>Edit Merchant</h1>
+<h1>Editing Merchant</h1>
 
-<%= form_with url: "/admin/merchants/#{@merchants.id}", method: :patch, local: true do |f| %>
+<%= render 'form', customer: @merchant %>
 
-<%= f.label :name%>
-  <%= f.text_field :name %>
-
-  <%= f.submit "Save Update"  %>
-  <% end %>
+<%= link_to 'Show', @merchant %> |
+<%= link_to 'Back', merchants_path %>
