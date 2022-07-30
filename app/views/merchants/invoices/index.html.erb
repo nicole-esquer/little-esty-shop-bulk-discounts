@@ -15,11 +15,9 @@
   <tbody>
     <% @invoices.each do |invoice| %>
       <tr>
-        <td><%= link_to invoice.id, invoice_path(invoice) %></td>
+        <td><%= link_to invoice.id, merchants_invoice_path(invoice.id) %></td>
         <td><%= invoice.status %></td>
         <td><%= format_date(invoice.created_at) %></td>
-        <td><%= link_to 'Edit', edit_invoice_item_path(invoice) %></td>
-        <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
