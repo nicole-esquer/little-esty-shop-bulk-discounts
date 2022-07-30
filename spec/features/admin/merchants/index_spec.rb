@@ -16,4 +16,20 @@ RSpec.describe 'admin merchant index' do
     expect(page).to have_content(merchant.name)
   end
 
+  it 'when i visit, I see a button to disable or enable the merchant' do
+    merchant = Merchant.create!(name: "The Gibson Project")
+
+    visit "/admin/merchants"
+
+    expect(current_path).to eq("/admin/merchants")
+    expect(page).to have_content("Disabled")
+    expect(page).to have_content("Enabled")
+  end
+
+
+
+
+
+
+
 end
