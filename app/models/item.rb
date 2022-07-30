@@ -21,15 +21,16 @@ class Item < ApplicationRecord
   end
 
   
-    def update_status(item)
-      if item.status == 'enabled' 
-        item.status = 'disabled'
-        item.save
-      else
-        item.status = 'enabled'
-        item.save
-      end
+  def update_status(item)
+    if item.status == 'enabled' 
+      item.status = 'disabled'
+      item.save
+    elsif
+      item.status =='disabled'
+      item.status = 'enabled'
+      item.save
     end
+  end
 
   # validates :status, inclusion: { in: ["enabled", "disabled"] }
 end
