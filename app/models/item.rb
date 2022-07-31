@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
  
-  enum status: { enabled: 0, disabled: 1 } 
+  enum status: { disabled: 0, enabled: 1 } 
   
   validates_presence_of :merchant_id, :name, :description, :unit_price
   validates :status, inclusion: { in: ["enabled", "disabled"] }
