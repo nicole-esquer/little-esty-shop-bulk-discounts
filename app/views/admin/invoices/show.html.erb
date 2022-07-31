@@ -15,4 +15,6 @@ Items:
 
 <h3>Update Invoice Status:</h3>
 <%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
-<%= f.sele%>
+<%= f.select :status, ["cancelled", "in progress", "completed"], selected: @invoice.status %>
+<%= f.submit "Update Status" %>
+<% end %>

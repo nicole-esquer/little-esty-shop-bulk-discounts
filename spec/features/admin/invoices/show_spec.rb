@@ -49,6 +49,16 @@ RSpec.describe 'admin invoices show page' do
           
       expect(page).to have_content("Total Revenue: 103.0")
    end
+
+   it 'shows invoice status is a select field' do
+      visit admin_invoice_path(@invoice_1)
+      expect(page).to have_content("in progress")
+
+      select "completed", from: :status
+      
+      click_button "Update Status"
+      expect(page).to have_content("completed")
+   end
 end
 
 
