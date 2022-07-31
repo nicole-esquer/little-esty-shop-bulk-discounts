@@ -25,29 +25,29 @@ class Admin::MerchantsController < ApplicationController
 
    def update
      @merchant = Merchant.find(params[:id])
-     if @merchant.update(admin_merchant_params)
+      @merchant.update(admin_merchant_params)
        #format.html  redirect_to  admin_merchants, notice: "Merchant was successfully updated."
-        flash[:notice] = "Your merchant has been updated."
-        redirect_to "/admin/merchants/#{@merchant.id}"
-    else
-       redirect_to "/admin/merchants/#{@merchant.id}/edit"
+      flash[:notice] = "Your merchant has been updated."
+      @merchant.update(status: params[:status])
+      redirect_to "/admin/merchants/#{@merchant.id}"
+        #used to be an else here, if was at 2nd merchant
+       #redirect_to "/admin/merchants/#{@merchant.id}/edit"
       #flash[:alert] = "Error: #{error_message(@merchant.errors)}"
     end
 
 
-    def update_status(merchant)
-      if merchant.status == 'enabled'
-       merchant.status = 'disabled'
-       merchant.save
-     else
-       merchant.status = 'enabled'
-       merchant.save
-     end
-   end
+    #def update_status(merchant)
+    #  if merchant.status == 'enabled'
+    #   merchant.status = 'disabled'
+    #   merchant.save
+     #else
+      # merchant.status = 'enabled'
+      # merchant.save
+     #end
+   #end
 
    private
      def admin_merchant_params
        params.permit(:merchant_id, :name, :status)
      end
  end
-end
