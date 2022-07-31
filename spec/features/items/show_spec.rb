@@ -22,11 +22,11 @@ RSpec.describe "Merchant Item Show Page", type: :feature do
             description: "Size L stain resistant jersey", 
             unit_price: 20000, merchant_id: merchant_2.id)
 
-        visit "/merchants/#{merchant_1.id}/items"
+        visit merchants_items_path(merchant_1)
 
         click_link("Basket Ball")
 
-        expect(page).to have_current_path("/merchants/#{merchant_1.id}/items/#{item_1.id}")
+        expect(page).to have_current_path(merchants_item_path(merchant_1))
         expect(page).to have_content("Basket Ball")
         expect(page).to have_content("Description: Wilson 29 in orange ball")
         expect(page).to have_content("Price: 25000")
