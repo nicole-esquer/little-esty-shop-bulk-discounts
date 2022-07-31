@@ -14,6 +14,15 @@ class Merchant < ApplicationRecord
   def items_ready_to_ship
     invoice_items.where(status: :packaged)
   end
+
+  def self.enabled_merchants(id)
+    where(merchant_id: id, status: "enabled")
+  end
+
+  def self.disabled_merchants(id)
+    where(merchant_id: id, status: "disabled")
+  end
+
 end
 
 # section for "Items Ready to Ship"
