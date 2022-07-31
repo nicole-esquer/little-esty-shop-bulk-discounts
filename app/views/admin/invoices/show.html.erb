@@ -10,3 +10,11 @@ Items:
    <p>Price: $<%= invoice_item.unit_price %> </p>
    <p>Item Status: <%= invoice_item.status %> </p>
 <% end %>
+
+<h3>Total Revenue: <%= @invoice.total_revenue %></h3>
+
+<h3>Update Invoice Status:</h3>
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, local: true do |f| %>
+<%= f.select :status, ["cancelled", "in progress", "completed"], selected: @invoice.status %>
+<%= f.submit "Update Status" %>
+<% end %>

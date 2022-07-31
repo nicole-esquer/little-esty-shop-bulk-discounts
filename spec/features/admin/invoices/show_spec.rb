@@ -32,7 +32,7 @@ RSpec.describe 'admin invoices show page' do
 
    it "has all items on the invoice w/item name, quantity, price, and invoice item status" do
       visit admin_invoice_path(@invoice_1)
-      
+
       expect(page).to have_content("Name: Item 1")
       expect(page).to have_content("Name: Item 3")
       expect(page).to have_content("Quantity: 1")
@@ -42,6 +42,22 @@ RSpec.describe 'admin invoices show page' do
 
       expect(page).to_not have_content("Name: Item 2")
       expect(page).to_not have_content("Price: $2000")
+   end
+
+   it 'shows the total revenue from all items on specific invoice' do
+      visit admin_invoice_path(@invoice_1)
+          
+      expect(page).to have_content("Total Revenue: 103.0")
+   end
+
+   it 'shows invoice status is a select field' do
+      visit admin_invoice_path(@invoice_1)
+      expect(page).to have_content("in progress")
+
+      select "completed", from: :status
+      
+      click_button "Update Status"
+      expect(page).to have_content("completed")
    end
 end
 
