@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   root 'merchants/dashboard#show'
+  post "/merchants/:merchant_id/items/", to: "merchants/items#create"
 
   get "/merchants/:merchant_id/dashboard", to: "merchants/dashboard#show", as: :merchant_dashboard
-  post "/merchants/:merchant_id/items/", to: "merchants/items#change_status"
+  patch "/merchants/:merchant_id/items/", to: "merchants/items#change_status"
   
   namespace :merchants do
     scope '/:id', only: [:show] do
-      resources :items, only: [:index, :show, :edit, :update]
+      resources :items, only: [:index, :show, :new, :create, :edit, :update]
       resources :invoices, only: [:index, :show, :edit, :update]
     end
   end

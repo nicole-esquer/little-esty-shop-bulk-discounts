@@ -12,24 +12,34 @@ class Merchants::ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def new
+    @merchant = Merchant.find(params[:id])
+  end
+
+  def create
+    merchant = Merchant.find(params[:merchant_id])
+    item = merchant.items.create(merchants_item_params)
+
+    redirect_to "/merchants/#{merchant.id}/items"
+  end
+
+
   def edit
     @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:id])
   end
 
   def change_status
-    merchant = Merchant.find(params[:merchant_id])
-    item = Item.find(params[:item_id])
-    item.update_status(item)
-    redirect_to merchants_items_path(merchant.id)
+      merchant = Merchant.find(params[:merchant_id])
+      item = Item.find(params[:item_id])
+      item.update_status(item)
+      redirect_to merchants_items_path(merchant.id)
   end
 
   def update
     @item = Item.find(params[:id])
     if params[:update_status]
       if @item.update_status
-        binding.pry
-        #  if @item.update!(merchant_items_params)
         redirect_to merchants_items_path(@merchant.id), notice: "Item status has been successfully updated!"
       else
         render :edit, status: :unprocessable_entity
@@ -40,6 +50,7 @@ class Merchants::ItemsController < ApplicationController
       @merchant = Merchant.find(params[:merchant][:id])
     end
   end
+
 
   private
     def merchants_item_params

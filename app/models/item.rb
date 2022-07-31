@@ -20,7 +20,6 @@ class Item < ApplicationRecord
     where(merchant_id: id, status: "disabled")
   end
 
-  
   def update_status(item)
     if item.status == 'enabled' 
       item.status = 'disabled'

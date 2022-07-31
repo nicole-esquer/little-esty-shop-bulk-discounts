@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Merchant Items</h1>
+ <%= link_to "Create a New Item", "/merchants/#{@merchant.id}/items/new" %> |
 
 <h2>Enabled Items</h2>
 <table>
@@ -20,7 +21,7 @@
           <td><%= item.id %></td>
           <td><%= link_to item.name, merchants_item_path(item) %></td>
           <td><%= item.status %></td>    
-          <td><%= button_to "Disable", merchants_items_path(item_id: item.id), method: :change_status %></td> 
+          <td><%= button_to "Disable", merchants_items_path(item_id: item.id), method: :patch %></td> 
       </tr>
     <% end %>
   </tbody>
@@ -44,7 +45,7 @@
           <td><%= item.id %></td>
           <td><%= link_to item.name, merchants_item_path(item) %></td>
           <td><%= item.status %></td>    
-          <td><%= button_to "Enable", merchants_items_path(item_id: item.id), method: :change_status %></td> 
+          <td><%= button_to "Enable", merchants_items_path(item_id: item.id), method: :patch %></td> 
       </tr>
     <% end %>
   </tbody>
