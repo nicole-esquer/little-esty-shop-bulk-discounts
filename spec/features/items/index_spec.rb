@@ -9,11 +9,13 @@ RSpec.describe "merchants items index page", type: :feature do
         item_1 = Item.create!(
             name: "Basket Ball",
             description: "Wilson 29 in orange ball",
-            unit_price: 25000, merchant_id: merchant_1.id)
+            unit_price: 25000, merchant_id: merchant_1.id,
+            status: 1)
         item_2 = Item.create!(
             name: "Jordans",
             description: "High quality size 11 athletic shoes",
-            unit_price: 45000, merchant_id: merchant_1.id)
+            unit_price: 45000, merchant_id: merchant_1.id,
+            status: 1)
         item_3 = Item.create!(
             name: "Basket Ball",
             description: "Wilson 29 in orange ball",
@@ -70,11 +72,15 @@ RSpec.describe "merchants items index page", type: :feature do
         item_1 = Item.create!(
             name: "Basket Ball",
             description: "Wilson 29 in orange ball",
-            unit_price: 25000, merchant_id: merchant_1.id)
+            unit_price: 25000, merchant_id: merchant_1.id,
+            status: 1)
         item_2 = Item.create!(
             name: "Jordans",
             description: "High quality size 11 athletic shoes",
-            unit_price: 45000, merchant_id: merchant_1.id)
+
+            unit_price: 45000, merchant_id: merchant_1.id,
+            status: 1)
+
             
 
         visit merchants_items_path(merchant_1)
@@ -85,11 +91,12 @@ RSpec.describe "merchants items index page", type: :feature do
         expect(current_path).to eq(merchants_items_path(merchant_1))
         end
       
-        # within("#disable-#{item_1.id}") do
-        #     binding.pry
-        # expect(item_1.name).to eq("Basket Ball")
+
+        within("#disable-#{item_1.id}") do
+        expect(page).to have_content("Basket Ball")
         # expect(item_1.status).to eq("disabled")
-        # end
+        end
+
     end
 
     it 'disable items have a enable button that changes status to enable' do
@@ -99,17 +106,19 @@ RSpec.describe "merchants items index page", type: :feature do
             name: "Basket Ball",
             description: "Wilson 29 in orange ball",
             unit_price: 25000, merchant_id: merchant_1.id,
-            status: 1)
+            status: 0)
+
         item_2 = Item.create!(
             name: "Jordans",
             description: "High quality size 11 athletic shoes",
             unit_price: 45000, merchant_id: merchant_1.id,
-            status: 1)
+            status: 0)
    
         visit merchants_items_path(merchant_1)
 
         within("#disable-#{item_2.id}") do
-        click_button("Enable")
+        click_on("Enable")
+
         expect(current_path).to eq(merchants_items_path(merchant_1))
         end
         # expect(item_2.status).to eq("enabled")
@@ -121,7 +130,8 @@ RSpec.describe "merchants items index page", type: :feature do
         item_1 = Item.create!(
             name: "Basket Ball",
             description: "Wilson 29 in orange ball",
-            unit_price: 25000, merchant_id: merchant_1.id)
+            unit_price: 25000, merchant_id: merchant_1.id,
+            status:1)
         item_2 = Item.create!(
             name: "Jordans",
             description: "High quality size 11 athletic shoes",
@@ -140,12 +150,13 @@ RSpec.describe "merchants items index page", type: :feature do
         item_1 = Item.create!(
             name: "Basket Ball",
             description: "Wilson 29 in orange ball",
-            unit_price: 25000, merchant_id: merchant_1.id)
+            unit_price: 25000, merchant_id: merchant_1.id,
+            status: 1)
         item_2 = Item.create!(
             name: "Jordans",
             description: "High quality size 11 athletic shoes",
             unit_price: 45000, merchant_id: merchant_1.id,
-            status: 1)
+            status: 0)
 
         visit merchants_items_path(merchant_1)
 
@@ -160,18 +171,63 @@ RSpec.describe "merchants items index page", type: :feature do
         expect(page).to_not have_link("Basket Ball")
         end
     end
+
+
+    it 'has a button to create new item' do
+        merchant_1 = Merchant.create!(name: "Micheal Jordan")
+
+        item_1 = Item.create!(
+            name: "Basket Ball",
+            description: "Wilson 29 in orange ball",
+            unit_price: 25000, merchant_id: merchant_1.id)
+
+        visit merchants_items_path(merchant_1)
+
+        click_on("Create a New Item")
+        expect(current_path).to eq(new_merchants_item_path(merchant_1))
+    end
+   
+    it 'creates new item with default status of diabled' do
+        merchant_1 = Merchant.create!(name: "Micheal Jordan")
+
+        item_1 = Item.create!(
+            name: "Basket Ball",
+            description: "Wilson 29 in orange ball",
+            unit_price: 25000, merchant_id: merchant_1.id)
+
+        visit merchants_items_path(merchant_1)
+
+        click_on("Create a New Item")
+        fill_in 'Name', with: 'Toy Doll'
+        fill_in 'Description', with: '8in Speaking Amy Doll'
+        select "enabled", :from => "Status"
+        fill_in "Unit price", with: 10
+        click_button 'Save'
+        expect(current_path).to eq(merchants_items_path(merchant_1))
+        expect(item_1.status).to eq("disabled")
+    end
+   
+    it 'dispalys new item on merchant item index page' do
+        merchant_1 = Merchant.create!(name: "Micheal Jordan")
+
+        item_1 = Item.create!(
+            name: "Basket Ball",
+            description: "Wilson 29 in orange ball",
+            unit_price: 25000, merchant_id: merchant_1.id)
+
+        visit merchants_items_path(merchant_1)
+
+        click_on("Create a New Item")
+        fill_in 'Name', with: 'Toy Doll'
+        fill_in 'Description', with: '8in Speaking Amy Doll'
+        select "enabled", :from => "Status"
+        fill_in "Unit price", with: 10
+        click_button 'Save'
+        expect(page).to have_content(item_1.name)
+    end
+
+
 end
 
 
 
-
-# As a merchant
-# When I visit my items index page
-#  Next to each item name I see a button to disable or enable that item.
-#  When I click this button
-# Then I am redirected back to the items index
-#  And I see that the items status has changed
-
-#  As a merchant and I visit my merchant items index page ("merchants/merchant_id/items")
-#  I see a list of the names of all of my items (with link to item)
-#  And I do not see items for any other merchant
