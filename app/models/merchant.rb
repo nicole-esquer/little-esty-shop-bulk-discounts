@@ -15,6 +15,7 @@ class Merchant < ApplicationRecord
     invoice_items.where(status: :packaged)
   end
 
+
   def top_5_items
     items.joins(:invoice_items, invoices: :transactions)
     # items.joins(:transactions)
@@ -24,4 +25,14 @@ class Merchant < ApplicationRecord
     .order(revenue: :desc)
     .limit(5)
   end
+
+  def self.enabled_merchants(id)
+    where(merchant_id: id, status: "enabled")
+  end
+
+  def self.disabled_merchants(id)
+    where(merchant_id: id, status: "disabled")
+  end
+
 end
+

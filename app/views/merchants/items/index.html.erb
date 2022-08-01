@@ -3,6 +3,7 @@
 <h1>Merchant Items</h1>
  <%= link_to "Create a New Item", "/merchants/#{@merchant.id}/items/new" %> |
 
+
  <h2> Top 5 Items by Generated Revenue: </h2>
   <div id="top_5_items">
     <% @merchant.top_5_items.each do |item| %>
@@ -10,6 +11,7 @@
         <%= link_to item.name, merchants_item_path(@merchant, item) %>
       <% end %>
   </div>
+
 
 <h2>Enabled Items</h2>
 <table>

@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   root 'merchants/dashboard#show'
+
  
 
   get "/merchants/:merchant_id/dashboard", to: "merchants/dashboard#show", as: :merchant_dashboard
   patch "/merchants/:merchant_id/items", to: "merchants/items#change_status"
+
   
   namespace :merchants do
     scope '/:id', only: [:show] do
@@ -13,6 +15,12 @@ Rails.application.routes.draw do
   end
   
   get "/admin/", to: "admin/dashboard#index", as: :admin_dashboard
+  
+  # get "/admin/", to: "admin/dashboard#index", as: :admin_dashboard
+  #get "/admin/merchants", to: "admin/merchants#index"
+  #get "/admin/invoices", to: "admin/invoices#index"
+
+
 
   namespace :admin do
     resources :merchants

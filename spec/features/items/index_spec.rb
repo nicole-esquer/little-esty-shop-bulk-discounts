@@ -77,6 +77,7 @@ RSpec.describe "merchants items index page", type: :feature do
         item_2 = Item.create!(
             name: "Jordans",
             description: "High quality size 11 athletic shoes",
+
             unit_price: 45000, merchant_id: merchant_1.id,
             status: 1)
             
@@ -92,6 +93,7 @@ RSpec.describe "merchants items index page", type: :feature do
         within("#disable-#{item_1.id}") do
         expect(page).to have_content("Basket Ball")
         end
+
     end
 
     it 'disable items have a enable button that changes status to enable' do
@@ -102,6 +104,7 @@ RSpec.describe "merchants items index page", type: :feature do
             description: "Wilson 29 in orange ball",
             unit_price: 25000, merchant_id: merchant_1.id,
             status: 0)
+
         item_2 = Item.create!(
             name: "Jordans",
             description: "High quality size 11 athletic shoes",
@@ -112,8 +115,10 @@ RSpec.describe "merchants items index page", type: :feature do
 
         within("#disable-#{item_2.id}") do
         click_on("Enable")
+
         expect(current_path).to eq(merchants_items_path(merchant_1))
         end
+
     end
 
     it 'display 2 sections called enabled items and disabled items' do
@@ -150,6 +155,7 @@ RSpec.describe "merchants items index page", type: :feature do
             unit_price: 45000, merchant_id: merchant_1.id,
             status: 0)
 
+
         visit merchants_items_path(merchant_1)
 
 
@@ -163,6 +169,7 @@ RSpec.describe "merchants items index page", type: :feature do
         expect(page).to_not have_link("Basket Ball")
         end
     end
+
 
     it 'has a button to create new item' do
         merchant_1 = Merchant.create!(name: "Micheal Jordan")
@@ -322,16 +329,58 @@ RSpec.describe "merchants items index page", type: :feature do
 end
 
 
+    it 'has a button to create new item' do
+        merchant_1 = Merchant.create!(name: "Micheal Jordan")
 
+        item_1 = Item.create!(
+            name: "Basket Ball",
+            description: "Wilson 29 in orange ball",
+            unit_price: 25000, merchant_id: merchant_1.id)
 
+        visit merchants_items_path(merchant_1)
 
-# As a merchant and when I visit my items index page
+        click_on("Create a New Item")
+        expect(current_path).to eq(new_merchants_item_path(merchant_1))
+    end
+   
+    it 'creates new item with default status of diabled' do
+        merchant_1 = Merchant.create!(name: "Micheal Jordan")
 
-#  Then I see the names of the top 5 most popular items ranked by total revenue generated
-#  And I see that each item name links to my merchant item show page for that item
-#  And I see the total revenue generated next to each item name
-# Notes on Revenue Calculation:
+        item_1 = Item.create!(
+            name: "Basket Ball",
+            description: "Wilson 29 in orange ball",
+            unit_price: 25000, merchant_id: merchant_1.id)
 
-# Only invoices with at least one successful transaction should count towards revenue
-# Revenue for an invoice should be calculated as the sum of the revenue of all invoice items
-# Revenue for an invoice item should be calculated as the invoice item unit price multiplied by the quantity (do not use the item unit price)
+        visit merchants_items_path(merchant_1)
+
+        click_on("Create a New Item")
+        fill_in 'Name', with: 'Toy Doll'
+        fill_in 'Description', with: '8in Speaking Amy Doll'
+        select "enabled", :from => "Status"
+        fill_in "Unit price", with: 10
+        click_button 'Save'
+        expect(current_path).to eq(merchants_items_path(merchant_1))
+        expect(item_1.status).to eq("disabled")
+    end
+   
+    it 'dispalys new item on merchant item index page' do
+        merchant_1 = Merchant.create!(name: "Micheal Jordan")
+
+        item_1 = Item.create!(
+            name: "Basket Ball",
+            description: "Wilson 29 in orange ball",
+            unit_price: 25000, merchant_id: merchant_1.id)
+
+        visit merchants_items_path(merchant_1)
+
+        click_on("Create a New Item")
+        fill_in 'Name', with: 'Toy Doll'
+        fill_in 'Description', with: '8in Speaking Amy Doll'
+        select "enabled", :from => "Status"
+        fill_in "Unit price", with: 10
+        click_button 'Save'
+        expect(page).to have_content(item_1.name)
+    end
+
+end
+
