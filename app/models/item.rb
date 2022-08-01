@@ -24,8 +24,7 @@ class Item < ApplicationRecord
     if item.status == 'enabled' 
       item.status = 'disabled'
       item.save
-    elsif
-      item.status =='disabled'
+    else
       item.status = 'enabled'
       item.save
     end
