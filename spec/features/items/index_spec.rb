@@ -286,17 +286,17 @@ RSpec.describe "merchants items index page", type: :feature do
             item_id: item_6.id, invoice_id: invoice_2.id, quantity:1, 
             unit_price: item_6.unit_price, status: 2)
         brenna_invoice_item5 = InvoiceItem.create!(
-            item_id: item_5, invoice_id: invoice_3.id, quantity:1, 
+            item_id: item_5.id, invoice_id: invoice_3.id, quantity:1, 
             unit_price: item_5.unit_price, status: 1)
         brenna_invoice_item7 = InvoiceItem.create!(
-            item_id: item_7, invoice_id: invoice_3.id, quantity:1, 
+            item_id: item_7.id, invoice_id: invoice_3.id, quantity:1, 
             unit_price: item_5.unit_price, status: 1)
  
 
 
         visit merchants_items_path(merchant_1)
 
-        expect(page).to have_content("Top 5 Items by Generate Renvenue:")
+        expect(page).to have_content("Top 5 Items by Generated Renvenue:")
 
 #below is also the order of the highest revenue earned items
 #item 3 was incomplete and did not make the cut

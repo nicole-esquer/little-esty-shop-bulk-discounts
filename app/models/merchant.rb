@@ -14,4 +14,9 @@ class Merchant < ApplicationRecord
   def items_ready_to_ship
     invoice_items.where(status: :packaged)
   end
+
+  # def top_5_items #by highest revenue produced
+  #   invoice_items.where(status: :package || :shipped)
+  #   items.select(
+  # end
 end
