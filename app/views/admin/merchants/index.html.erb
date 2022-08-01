@@ -1,6 +1,19 @@
 <h1>Admin Merchant Index</h1>
 
 <% @merchants.each do |merchant| %>
-
-<%=link_to merchant.name, "/admin/merchants/#{merchant.id}"  %>
+<p><%=link_to merchant.name, "/admin/merchants/#{merchant.id}" %> </p>
 <% end  %>
+
+
+
+<% @merchants.each do |merchant| %>
+          <%= merchant.id %>
+          <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
+          <% if  merchant.status == 'Enable' %>
+          <%= button_to "Disable", "/admin/merchants", method: :patch, params: {status: "Disable", id: merchant.id} %>
+          <% else merchant.status == "Disable" %>
+          <%= merchant.status %>
+          <%= button_to "Enable", "/admin/merchants", method: :patch, params: {status: "Enable"} %>
+
+    <% end %>
+    <% end  %>
