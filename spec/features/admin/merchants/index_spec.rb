@@ -27,9 +27,4 @@ RSpec.describe 'admin merchant index' do
   end
 
 
-
-
-
-
-
 end
