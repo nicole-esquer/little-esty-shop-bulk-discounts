@@ -265,11 +265,12 @@ RSpec.describe "merchants items index page", type: :feature do
         invoice_3 = Invoice.create!(customer_id: brenna.id, status: 2)
         invoice_4 = Invoice.create!(customer_id: nicole.id, status: 1)
 
-        invoice1_transaction_1 = invoice_1.transactions.create(result: 0)
-        invoice2_transaction_2 = invoice_2.transactions.create(result: 0)
-        invoice3_transaction_3 = invoice_3.transactions.create(result: 0)
-        invoice4_transaction_4 = invoice_4.transactions.create(result: 1)
-        binding.pry
+        # transaction_1 = Transaction.create!(invoice_id: invoice_1.id, credit_card_number: '983475', credit_card_expiration_date: nil, result: 'success')
+
+        invoice1_transaction_1 = invoice_1.transactions.create!(result: 0, credit_card_number: 983475, credit_card_expiration_date: nil)
+        invoice2_transaction_2 = invoice_2.transactions.create!(result: 0, credit_card_number: 982345, credit_card_expiration_date: nil)
+        invoice3_transaction_3 = invoice_3.transactions.create!(result: 0, credit_card_number: 912432, credit_card_expiration_date: nil)
+        invoice4_transaction_4 = invoice_4.transactions.create!(result: 1, credit_card_number: 534575, credit_card_expiration_date: nil)
         
         nicole_invoice_item1 = item_1.invoice_items.create!(
             item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, 
@@ -301,7 +302,7 @@ RSpec.describe "merchants items index page", type: :feature do
         visit merchants_items_path(merchant_1)
         save_and_open_page
 
-        expect(page).to have_content("Top 5 Items by Generated Renvenue:")
+        expect(page).to have_content("Top 5 Items by Generated Revenue:")
 
 
 
@@ -317,10 +318,7 @@ RSpec.describe "merchants items index page", type: :feature do
         expect(page).to_not have_content("Socks")
         expect(page).to_not have_content("Lollipops")
         end
-
      end
-
-
 end
 
 
