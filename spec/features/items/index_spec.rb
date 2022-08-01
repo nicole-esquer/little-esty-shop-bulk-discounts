@@ -261,36 +261,36 @@ RSpec.describe "merchants items index page", type: :feature do
         nicole = Customer.create!(first_name: "Nicole", last_name: "Esquer")
         andre = Customer.create!(first_name: "Andre", last_name: "Pedro")
         brenna = Customer.create!(first_name: "Brenna", last_name: "Stuart")
-        
+
         invoice_1 = Invoice.create!(customer_id: nicole.id, status: 2)
         invoice_2 = Invoice.create!(customer_id: andre.id, status: 2)
         invoice_3 = Invoice.create!(customer_id: brenna.id, status: 2)
         invoice_4 = Invoice.create!(customer_id: nicole.id, status: 1)
         
         nicole_invoice_item1 = InvoiceItem.create!(
-            item_id: nicole.id, invoice_id: invoice_1.id, quantity: 1, 
-            unit_price: item_1.unit_price, status: invoice_1.status)
+            item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, 
+            unit_price: item_1.unit_price, status: 2)
         nicole_invoice_item2 = InvoiceItem.create!(
-            item_id: nicole.id, invoice_id: invoice_1.id, quantity:2, 
-            unit_price: item_2.unit_price, status: invoice_1.status)
+            item_id: item_2.id, invoice_id: invoice_1.id, quantity:2, 
+            unit_price: item_2.unit_price, status: 2)
         nicole_invoice4_item3 = InvoiceItem.create!(
-            item_id: nicole.id, invoice_id: invoice_4.id, quantity: 10000, 
-            unit_price: item_3.unit_price, status: invoice_4.status)
+            item_id: item_3.id, invoice_id: invoice_4.id, quantity: 10000, 
+            unit_price: item_3.unit_price, status: 0)
         andre_invoice_item4 = InvoiceItem.create!(
-            item_id: andre.id, invoice_id:invoice_2.id, quantity: 1, 
-            unit_price: item_4.unit_price, status: invoice_2.status)
+            item_id: item_4.id, invoice_id:invoice_2.id, quantity: 1, 
+            unit_price: item_4.unit_price, status: 2)
         andre_invoice_item5 = InvoiceItem.create!(
-            item_id: andre.id, invoice_id: invoice_2.id, quantity: 1, 
-            unit_price: item_5.unit_price, status: invoice_2.status)
+            item_id: item_5.id, invoice_id: invoice_2.id, quantity: 1, 
+            unit_price: item_5.unit_price, status: 2)
         andre_invoice_item6 = InvoiceItem.create!(
-            item_id: andre.id, invoice_id: invoice_2.id, quantity:1, 
-            unit_price: item_6.unit_price, status: invoice_2.status)
+            item_id: item_6.id, invoice_id: invoice_2.id, quantity:1, 
+            unit_price: item_6.unit_price, status: 2)
         brenna_invoice_item5 = InvoiceItem.create!(
-            item_id: brenna.id, invoice_id: invoice_3.id, quantity:1, 
-            unit_price: item_5.unit_price, status: invoice_3.status)
+            item_id: item_5, invoice_id: invoice_3.id, quantity:1, 
+            unit_price: item_5.unit_price, status: 1)
         brenna_invoice_item7 = InvoiceItem.create!(
-            item_id: brenna.id, invoice_id: invoice_3.id, quantity:1, 
-            unit_price: item_5.unit_price, status: invoice_3.status)
+            item_id: item_7, invoice_id: invoice_3.id, quantity:1, 
+            unit_price: item_5.unit_price, status: 1)
  
 
 
@@ -298,7 +298,7 @@ RSpec.describe "merchants items index page", type: :feature do
 
         expect(page).to have_content("Top 5 Items by Generate Renvenue:")
 
-#blow is also the order of the highest revenue earned items
+#below is also the order of the highest revenue earned items
 #item 3 was incomplete and did not make the cut
 #item 7 dis not make the top 5 cut either since it had the lowest
         within "#top_5_items" do
