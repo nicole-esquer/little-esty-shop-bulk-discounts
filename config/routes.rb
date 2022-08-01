@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   
   get "/admin/", to: "admin/dashboard#index", as: :admin_dashboard
 
+
   namespace :admin do
     resources :merchants
     resources :invoices

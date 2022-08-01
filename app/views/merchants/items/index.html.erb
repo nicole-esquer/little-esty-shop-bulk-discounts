@@ -16,7 +16,7 @@
 
   <tbody>
     <% @enabled_items.each do |item| %>
-      <tr>
+      <tr id="enable-<%=item.id%>">
           <td><%= item.id %></td>
           <td><%= link_to item.name, merchants_item_path(item) %></td>
           <td><%= item.status %></td>    
@@ -40,7 +40,7 @@
 
   <tbody>
     <% @disabled_items.each do |item| %>
-      <tr>
+      <tr id="disable-<%=item.id%>">
           <td><%= item.id %></td>
           <td><%= link_to item.name, merchants_item_path(item) %></td>
           <td><%= item.status %></td>    
