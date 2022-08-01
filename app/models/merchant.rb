@@ -15,6 +15,17 @@ class Merchant < ApplicationRecord
     invoice_items.where(status: :packaged)
   end
 
+
+  def top_5_items
+    items.joins(:invoice_items, invoices: :transactions)
+    # items.joins(:transactions)
+    .where(transactions: {result: :success})
+    .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
+    .group('items.id')
+    .order(revenue: :desc)
+    .limit(5)
+  end
+
   def self.enabled_merchants(id)
     where(merchant_id: id, status: "enabled")
   end
@@ -24,3 +35,4 @@ class Merchant < ApplicationRecord
   end
 
 end
+
