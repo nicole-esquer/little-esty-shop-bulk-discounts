@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   #get "/admin/invoices", to: "admin/invoices#index"
 
 
+
   namespace :admin do
     resources :merchants
     resources :invoices
