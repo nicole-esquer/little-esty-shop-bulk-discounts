@@ -22,18 +22,22 @@ class Admin::MerchantsController < ApplicationController
    def edit
      @merchant = Merchant.find(params[:id])
    end
-
+#need to fix the reroute to when we hit the disable or enable, we stay on the index page and not go to show page. def update method
    def update
      @merchant = Merchant.find(params[:id])
-      @merchant.update(admin_merchant_params)
+      if @merchant.update(admin_merchant_params) == "nil"
+        redirect_to "/admin/merchants"
+
        #format.html  redirect_to  admin_merchants, notice: "Merchant was successfully updated."
-      flash[:notice] = "Your merchant has been updated."
-      @merchant.update(status: params[:status])
-      redirect_to "/admin/merchants/#{@merchant.id}"
+     else
+       flash[:notice] = "Your merchant has been updated."
+       @merchant.update(status: params[:status])
+       redirect_to "/admin/merchants/#{@merchant.id}"
         #used to be an else here, if was at 2nd merchant
        #redirect_to "/admin/merchants/#{@merchant.id}/edit"
       #flash[:alert] = "Error: #{error_message(@merchant.errors)}"
     end
+  end
 
 
     #def update_status(merchant)

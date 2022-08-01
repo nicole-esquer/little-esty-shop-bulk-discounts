@@ -8,12 +8,12 @@
 
 <% @merchants.each do |merchant| %>
           <%= merchant.id %>
-          <%= link_to merchant.name, admin_merchants_path(merchant) %>
+          <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
           <% if  merchant.status == 'Enable' %>
-          <%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch, params: {status: "Disable", id: merchant.id} %>
-          <% binding.pry %>
+          <%= button_to "Disable", "/admin/merchants", method: :patch, params: {status: "Disable", id: merchant.id} %>
           <% else merchant.status == "Disable" %>
-          <%= button_to "Enable", admin_merchants_path(merchant_id: merchant.id), method: :patch, params: {status: "Enable"} %>
+          <%= merchant.status %>
+          <%= button_to "Enable", "/admin/merchants", method: :patch, params: {status: "Enable"} %>
 
     <% end %>
     <% end  %>
