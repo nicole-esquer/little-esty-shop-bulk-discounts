@@ -91,7 +91,6 @@ RSpec.describe "merchants items index page", type: :feature do
       
         within("#disable-#{item_1.id}") do
         expect(page).to have_content("Basket Ball")
-        # expect(item_1.status).to eq("disabled")
         end
     end
 
@@ -115,7 +114,6 @@ RSpec.describe "merchants items index page", type: :feature do
         click_on("Enable")
         expect(current_path).to eq(merchants_items_path(merchant_1))
         end
-        # expect(item_2.status).to eq("enabled")
     end
 
     it 'display 2 sections called enabled items and disabled items' do
@@ -266,43 +264,52 @@ RSpec.describe "merchants items index page", type: :feature do
         invoice_2 = Invoice.create!(customer_id: andre.id, status: 2)
         invoice_3 = Invoice.create!(customer_id: brenna.id, status: 2)
         invoice_4 = Invoice.create!(customer_id: nicole.id, status: 1)
+
+        invoice1_transaction_1 = invoice_1.transactions.create(result: 0)
+        invoice2_transaction_2 = invoice_2.transactions.create(result: 0)
+        invoice3_transaction_3 = invoice_3.transactions.create(result: 0)
+        invoice4_transaction_4 = invoice_4.transactions.create(result: 1)
+        binding.pry
         
-        nicole_invoice_item1 = InvoiceItem.create!(
+        nicole_invoice_item1 = item_1.invoice_items.create!(
             item_id: item_1.id, invoice_id: invoice_1.id, quantity: 1, 
             unit_price: item_1.unit_price, status: 2)
-        nicole_invoice_item2 = InvoiceItem.create!(
+        nicole_invoice_item2 = item_2.invoice_items.create!(
             item_id: item_2.id, invoice_id: invoice_1.id, quantity:2, 
             unit_price: item_2.unit_price, status: 2)
-        nicole_invoice4_item3 = InvoiceItem.create!(
+        nicole_invoice4_item3 = item_3.invoice_items.create!(
             item_id: item_3.id, invoice_id: invoice_4.id, quantity: 10000, 
             unit_price: item_3.unit_price, status: 0)
-        andre_invoice_item4 = InvoiceItem.create!(
+        andre_invoice_item4 = item_4.invoice_items.create!(
             item_id: item_4.id, invoice_id:invoice_2.id, quantity: 1, 
             unit_price: item_4.unit_price, status: 2)
-        andre_invoice_item5 = InvoiceItem.create!(
+        andre_invoice_item5 = item_5.invoice_items.create!(
             item_id: item_5.id, invoice_id: invoice_2.id, quantity: 1, 
             unit_price: item_5.unit_price, status: 2)
-        andre_invoice_item6 = InvoiceItem.create!(
+        andre_invoice_item6 = item_6.invoice_items.create!(
             item_id: item_6.id, invoice_id: invoice_2.id, quantity:1, 
             unit_price: item_6.unit_price, status: 2)
-        brenna_invoice_item5 = InvoiceItem.create!(
+        brenna_invoice_item5 = item_5.invoice_items.create!(
             item_id: item_5.id, invoice_id: invoice_3.id, quantity:1, 
             unit_price: item_5.unit_price, status: 1)
-        brenna_invoice_item7 = InvoiceItem.create!(
+        brenna_invoice_item7 = item_7.invoice_items.create!(
             item_id: item_7.id, invoice_id: invoice_3.id, quantity:1, 
             unit_price: item_5.unit_price, status: 1)
- 
+
 
 
         visit merchants_items_path(merchant_1)
+        save_and_open_page
 
         expect(page).to have_content("Top 5 Items by Generated Renvenue:")
+
+
 
 #below is also the order of the highest revenue earned items
 #item 3 was incomplete and did not make the cut
 #item 7 dis not make the top 5 cut either since it had the lowest
         within "#top_5_items" do
-        expect(page).to have_link("Jordans")
+        expect(page).to have_content("Jordans")
         expect(page).to have_link("Basket Ball")
         expect(page).to have_link("Logos")
         expect(page).to have_link("Water Bottle")

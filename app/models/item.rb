@@ -31,11 +31,5 @@ class Item < ApplicationRecord
     end
   end
 
-  def top_5_items
-    # items.joins(invoice_items: :transactions).where(transactions: {result: "success"})
-    # .group(:id).select("items.*, sum(quantity * invoice_items.unit_price) as revenue")
-  end
-
-
   # validates :status, inclusion: { in: ["enabled", "disabled"] }
 end
