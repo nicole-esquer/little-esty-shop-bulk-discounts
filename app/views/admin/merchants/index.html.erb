@@ -3,6 +3,7 @@
  <h2> Top 5 Merchants by Generated Revenue: </h2>
   <div id="top_5_merchants"> 
     <% @merchants.top_5_merchants.each do |merchant| %>
+    
         <%= merchant.id %>
         <%= link_to merchant.name, merchant_dashboard_path(merchant) %>
       <% end %>

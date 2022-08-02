@@ -36,17 +36,15 @@ RSpec.describe 'admin merchant index' do
         merchant_6 = Merchant.create!(name: "Kevin Durant", status: "enabled")
         merchant_7 = Merchant.create!(name: "Magic Johnson", status: "enabled")
 
-        item_1 = merchant_1.items.create!(merchant_id: merchant_1.id, name: "Item 1", description: "its the 1st item", unit_price: 1000, status: 1)
-        item_2 = merchant_2.items.create!(merchant_id: merchant_2.id, name: "Item 2", description: "its the 2nd item", unit_price: 2000, status: 1)
-        item_3 = merchant_2.items.create!(merchant_id: merchant_2.id, name: "Item 3", description: "its the 3rd item", unit_price: 300, status: 1)
-        item_4 = merchant_3.items.create!(merchant_id: merchant_3.id, name: "Item 4", description: "its the 4th item", unit_price: 10000, status: 1)
-        item_5 = merchant_4.items.create!(merchant_id: merchant_4.id, name: "Item 5", description: "its the 5th item", unit_price: 2000, status: 1)
-        item_6 = merchant_5.items.create!(merchant_id: merchant_5.id, name: "Item 6", description: "its the 6th item", unit_price: 300, status: 1)
-        item_7 = merchant_6.items.create!(merchant_id: merchant_6.id, name: "Item 7", description: "its the 7th item", unit_price: 500, status: 1)
-        item_8 = merchant_6.items.create!(merchant_id: merchant_6.id, name: "Item 8", description: "its the 8th item", unit_price: 2000, status: 1)
-        item_9 = merchant_7.items.create!(merchant_id: merchant_7.id, name: "Item 9", description: "its the 9th item", unit_price: 300, status: 1)
-        item_10 = merchant_7.items.create!(merchant_id: merchant_7.id, name: "Item 10", description: "its the 10th item", unit_price: 100, status: 1)
-
+        item_1 = merchant_1.items.create!(merchant_id: merchant_1.id, name: "Item 1", description: "its the 1st item", unit_price: 100, status: 1)
+        item_2 = merchant_2.items.create!(merchant_id: merchant_2.id, name: "Item 2", description: "its the 2nd item", unit_price: 40000, status: 1) #qty of two
+        item_3 = merchant_3.items.create!(merchant_id: merchant_3.id, name: "Item 3", description: "its the 3rd item", unit_price: 1000, status: 1) #trans canceled
+        item_4 = merchant_4.items.create!(merchant_id: merchant_4.id, name: "Item 4", description: "its the 4th item", unit_price: 10000, status: 1)
+        item_5 = merchant_5.items.create!(merchant_id: merchant_5.id, name: "Item 5", description: "its the 5th item", unit_price: 2000, status: 1) #two purchasers
+        item_6 = merchant_6.items.create!(merchant_id: merchant_6.id, name: "Item 6", description: "its the 6th item", unit_price: 300, status: 1)
+        item_7 = merchant_7.items.create!(merchant_id: merchant_7.id, name: "Item 7", description: "its the 7th item", unit_price: 600, status: 1)
+        item_8 = merchant_3.items.create!(merchant_id: merchant_3.id, name: "Item 8", description: "its the 8th item", unit_price: 250, status: 1)
+        
         nicole = Customer.create!(first_name: "Nicole", last_name: "Esquer")
         andre = Customer.create!(first_name: "Andre", last_name: "Pedro")
         brenna = Customer.create!(first_name: "Brenna", last_name: "Stuart")
@@ -54,7 +52,7 @@ RSpec.describe 'admin merchant index' do
         invoice_1 = Invoice.create!(customer_id: nicole.id, status: 2)
         invoice_2 = Invoice.create!(customer_id: andre.id, status: 2)
         invoice_3 = Invoice.create!(customer_id: brenna.id, status: 2)
-        invoice_4 = Invoice.create!(customer_id: nicole.id, status: 1)
+        invoice_4 = Invoice.create!(customer_id: nicole.id, status: 0)
 
         invoice1_transaction_1 = invoice_1.transactions.create!(result: 0, credit_card_number: 983475, credit_card_expiration_date: nil)
         invoice2_transaction_2 = invoice_2.transactions.create!(result: 0, credit_card_number: 982345, credit_card_expiration_date: nil)
@@ -76,29 +74,23 @@ RSpec.describe 'admin merchant index' do
         andre_invoice_item5 = item_5.invoice_items.create!(
             item_id: item_5.id, invoice_id: invoice_2.id, quantity: 1, 
             unit_price: item_5.unit_price, status: 2)
-        andre_invoice_item9 = item_9.invoice_items.create!(
-            item_id: item_9.id, invoice_id: invoice_2.id, quantity: 1, 
-            unit_price: item_9.unit_price, status: 2)
-        andre_invoice_item10 = item_10.invoice_items.create!(
-            item_id: item_10.id, invoice_id: invoice_2.id, quantity: 1, 
-            unit_price: item_10.unit_price, status: 2)
         andre_invoice_item6 = item_6.invoice_items.create!(
             item_id: item_6.id, invoice_id: invoice_2.id, quantity:1, 
             unit_price: item_6.unit_price, status: 2)
         brenna_invoice_item5 = item_5.invoice_items.create!(
             item_id: item_5.id, invoice_id: invoice_3.id, quantity:2, 
-            unit_price: item_5.unit_price, status: 1)
+            unit_price: item_5.unit_price, status: 2)
         brenna_invoice_item7 = item_7.invoice_items.create!(
             item_id: item_7.id, invoice_id: invoice_3.id, quantity:1, 
-            unit_price: item_7.unit_price, status: 1)
+            unit_price: item_7.unit_price, status: 2)
         brenna_invoice_item8 = item_8.invoice_items.create!(
             item_id: item_8.id, invoice_id: invoice_3.id, quantity:1, 
-            unit_price: item_8.unit_price, status: 1)
+            unit_price: item_8.unit_price, status: 2)
            
 
 
-        #the order of top 5 highest selling merchants is Shaquille, Kobe, Kevin, Steph, michael j
-        #lebron and majic j did not make the cut
+        #the order of top 5 highest selling merchants kobe, lebron, steph, magic kevin 
+        #(shaq and jordan did not make the cut)
 
         visit "/admin/merchants"
         save_and_open_page
@@ -106,13 +98,18 @@ RSpec.describe 'admin merchant index' do
         expect(page).to have_content("Top 5 Merchants by Generated Revenue:")
 
         within "#top_5_merchants" do
-        expect(page).to have_link("Shaquille Oneal")
-        expect(page).to have_link("Steph Curry")
         expect(page).to have_link("Kobe Bryant")
+        expect(page).to have_link("Steph Curry")
+        expect(page).to have_link("Lebron James")
+        expect(page).to have_link("Magic Johnson")
         expect(page).to have_link("Kevin Durant")
-        expect(page).to have_link("Micheal Jordan")
-        expect(page).to_not have_content("Lebron James")
-        expect(page).to_not have_content("Magic Johnson")
+        expect(page).to_not have_link("Shaquille Oneal")     
+        expect(page).to_not have_link("Michael Jordan")
+
+        expect(merchant_2.name).to appear_before(merchant_5.name)
+        expect(merchant_5.name).to appear_before(merchant_4.name)
+        expect(merchant_4.name).to appear_before(merchant_7.name)
+        expect(merchant_7.name).to appear_before(merchant_6.name)
         end
     end
 end
