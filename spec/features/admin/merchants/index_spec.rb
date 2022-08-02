@@ -2,32 +2,49 @@ require 'rails_helper'
 
 
 RSpec.describe 'admin merchant index' do
-  it 'When I visit the admin merchants index (/admin/merchants)' do
-    visit "/admin/merchants"
+    it 'When I visit the admin merchants index (/admin/merchants)' do
+        visit "/admin/merchants"
 
-    expect(current_path).to eq("/admin/merchants")
+        expect(current_path).to eq("/admin/merchants")
 
-  end
+    end
 
-  it 'I see the name of each merchant in the system' do
-    merchant = Merchant.create!(name: "The Gibson Project")
-    visit "/admin/merchants"
+    it 'I see the name of each merchant in the system' do
+        merchant = Merchant.create!(name: "The Gibson Project")
+        visit "/admin/merchants"
 
-    expect(page).to have_content(merchant.name)
-  end
+        expect(page).to have_content(merchant.name)
+    end
 
-  it 'when i visit, I see a button to disable or enable the merchant' do
-    merchant = Merchant.create!(name: "The Gibson Project")
+    it 'when i visit, I see a button to disable or enable the merchant' do
+        merchant = Merchant.create!(name: "The Gibson Project")
 
-    visit "/admin/merchants"
+        visit "/admin/merchants"
 
-    expect(current_path).to eq("/admin/merchants")
-    #expect(page).to have_content("Disabled")
-    expect(page).to have_button("Enable")
-  end
+        expect(current_path).to eq("/admin/merchants")
+        #expect(page).to have_content("Disabled")
+        expect(page).to have_button("Enable")
+    end
+
+    it 'when I visit the index page, I see two sections, one for enabled merchants and one for disable actions' do
+        merchant1 = Merchant.create!(name: "The Gibson Project", status:"disabled")
+        merchant2 = Merchant.create!(name: "The Allison Dream", status:"disabled")
+        merchant3 = Merchant.create!(name: "The Peter Chronicles", status:"enabled")
+        merchant4 = Merchant.create!(name: "The David Teeth", status:"enabled")
+
+        visit "/admin/merchants"
+
+        expect(page).to have_content("#{merchant1.name}")
+        expect(page).to have_content("disabled")
+        expect(page).to have_content("#{merchant2.name}")
+        expect(page).to have_content("#{merchant2.status}")
+        expect(page).to have_content("#{merchant3.name}")
+        expect(page).to have_content("#{merchant3.status}")
+        expect(page).to have_content("#{merchant4.name}")
+        expect(page).to have_content("enabled")
+    end
 
     it ' Admin has top 5 merchants based on revenue generated' do
-
         merchant_1 = Merchant.create!(name: "Micheal Jordan", status: "enabled")
         merchant_2 = Merchant.create!(name: "Kobe Bryant", status: "enabled")
         merchant_3 = Merchant.create!(name: "Shaquille Oneal", status: "enabled")
@@ -37,10 +54,10 @@ RSpec.describe 'admin merchant index' do
         merchant_7 = Merchant.create!(name: "Magic Johnson", status: "enabled")
 
         item_1 = merchant_1.items.create!(merchant_id: merchant_1.id, name: "Item 1", description: "its the 1st item", unit_price: 100, status: 1)
-        item_2 = merchant_2.items.create!(merchant_id: merchant_2.id, name: "Item 2", description: "its the 2nd item", unit_price: 40000, status: 1) #qty of two
-        item_3 = merchant_3.items.create!(merchant_id: merchant_3.id, name: "Item 3", description: "its the 3rd item", unit_price: 1000, status: 1) #trans canceled
+        item_2 = merchant_2.items.create!(merchant_id: merchant_2.id, name: "Item 2", description: "its the 2nd item", unit_price: 40000, status: 1)
+        item_3 = merchant_3.items.create!(merchant_id: merchant_3.id, name: "Item 3", description: "its the 3rd item", unit_price: 1000, status: 1) 
         item_4 = merchant_4.items.create!(merchant_id: merchant_4.id, name: "Item 4", description: "its the 4th item", unit_price: 10000, status: 1)
-        item_5 = merchant_5.items.create!(merchant_id: merchant_5.id, name: "Item 5", description: "its the 5th item", unit_price: 2000, status: 1) #two purchasers
+        item_5 = merchant_5.items.create!(merchant_id: merchant_5.id, name: "Item 5", description: "its the 5th item", unit_price: 2000, status: 1)
         item_6 = merchant_6.items.create!(merchant_id: merchant_6.id, name: "Item 6", description: "its the 6th item", unit_price: 300, status: 1)
         item_7 = merchant_7.items.create!(merchant_id: merchant_7.id, name: "Item 7", description: "its the 7th item", unit_price: 600, status: 1)
         item_8 = merchant_3.items.create!(merchant_id: merchant_3.id, name: "Item 8", description: "its the 8th item", unit_price: 250, status: 1)
@@ -86,11 +103,6 @@ RSpec.describe 'admin merchant index' do
         brenna_invoice_item8 = item_8.invoice_items.create!(
             item_id: item_8.id, invoice_id: invoice_3.id, quantity:1, 
             unit_price: item_8.unit_price, status: 2)
-           
-
-
-        #the order of top 5 highest selling merchants kobe, lebron, steph, magic kevin 
-        #(shaq and jordan did not make the cut)
 
         visit "/admin/merchants"
         save_and_open_page

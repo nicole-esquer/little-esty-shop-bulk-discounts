@@ -7,9 +7,9 @@ class Merchant < ApplicationRecord
 
   validates_presence_of :name, presence: true
 
-  def top_five_customers
-    # customers.select('customers.*, count(transactions.result) as success_count') joins(:invoices).where(transactions: { result: :success}).limit(5)
-  end
+  # def top_customers
+  #   customers.select('customers.*, count(transactions.result) as success_count') joins(:invoices).where(transactions: { result: :success}).limit(5)
+  # end
 
   def items_ready_to_ship
     invoice_items.where(status: :packaged)
