@@ -93,7 +93,7 @@ RSpec.describe 'admin merchant index' do
             unit_price: item_7.unit_price, status: 1)
         brenna_invoice_item8 = item_8.invoice_items.create!(
             item_id: item_8.id, invoice_id: invoice_3.id, quantity:1, 
-            unit_price: item_5.unit_price, status: 1)
+            unit_price: item_8.unit_price, status: 1)
 
         #the order of top 5 highest selling merchants is Shaquille,Steph, Kobe, Kevin. michael j
         #lebron and majic j did not make the cut
