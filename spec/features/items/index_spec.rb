@@ -313,9 +313,9 @@ RSpec.describe "merchants items index page", type: :feature do
 
 
 
-#below is also the order of the highest revenue earned items
-#item 3 was incomplete and did not make the cut
-#item 7 dis not make the top 5 cut either since it had the lowest
+        #below is also the order of the highest revenue earned items
+        #item 3 was incomplete and did not make the cut
+        #item 7 dis not make the top 5 cut either since it had the lowest
         within "#top_5_items" do
         expect(page).to have_content("Jordans")
         expect(page).to have_link("Basket Ball")
@@ -326,8 +326,6 @@ RSpec.describe "merchants items index page", type: :feature do
         expect(page).to_not have_content("Lollipops")
         end
      end
-end
-
 
     it 'has a button to create new item' do
         merchant_1 = Merchant.create!(name: "Micheal Jordan")

@@ -5,7 +5,7 @@
 
 
  <h2> Top 5 Items by Generated Revenue: </h2>
-  <div id="top_5_items">
+  <div id="top_5_items"> 
     <% @merchant.top_5_items.each do |item| %>
         <%= item.id %>
         <%= link_to item.name, merchants_item_path(@merchant, item) %>
