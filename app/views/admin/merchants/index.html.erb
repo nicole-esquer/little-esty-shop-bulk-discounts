@@ -21,6 +21,7 @@
           <td><%= merchant.id %><td>
           <td><%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %><td>
           <td><% if  merchant.status == 'enabled' %><td>
+            <td><%= merchant.status %><td>
           <td><%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch, params: {status: "disabled", id: merchant.id} %><td>
           <td><% else merchant.status == "disabled" %><td>
           <td><%= merchant.status %><td>

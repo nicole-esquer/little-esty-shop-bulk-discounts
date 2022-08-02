@@ -28,21 +28,21 @@ RSpec.describe 'admin merchant index' do
 
   it 'when I visit the index page, I see two sections, one for enabled merchants and one for disable actions' do
 
-  merchant1 = Merchant.create!(name: "The Gibson Project", status:"Disable")
-  merchant2 = Merchant.create!(name: "The Allison Dream", status:"Disable")
-  merchant3 = Merchant.create!(name: "The Peter Chronicles", status:"Enable")
-  merchant4 = Merchant.create!(name: "The David Teeth", status:"Enable")
+  merchant1 = Merchant.create!(name: "The Gibson Project", status:"disabled")
+  merchant2 = Merchant.create!(name: "The Allison Dream", status:"disabled")
+  merchant3 = Merchant.create!(name: "The Peter Chronicles", status:"enabled")
+  merchant4 = Merchant.create!(name: "The David Teeth", status:"enabled")
 
   visit "/admin/merchants"
 
   expect(page).to have_content("#{merchant1.name}")
-  expect(page).to have_content("#{merchant1.status}")
+  expect(page).to have_content("disabled")
   expect(page).to have_content("#{merchant2.name}")
   expect(page).to have_content("#{merchant2.status}")
   expect(page).to have_content("#{merchant3.name}")
   expect(page).to have_content("#{merchant3.status}")
   expect(page).to have_content("#{merchant4.name}")
-  expect(page).to have_content("#{merchant4.status}")
+  expect(page).to have_content("enabled")
 end
 
 
