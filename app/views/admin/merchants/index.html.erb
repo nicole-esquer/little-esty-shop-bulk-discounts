@@ -9,5 +9,34 @@
           <%= merchant.status %>
           <%= button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch, params: {status: "Enable"} %>
 
+
+
+<h2>Enabled Items</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Item ID</th>
+      <th>Item Name</th>
+      <th>Status</th>
+      <th>Update Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+<% @merchants.each do |merchant| %>
+  <tr>
+          <td><%= merchant.id %><td>
+          <td><%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %><td>
+          <td><% if  merchant.status == 'enabled' %><td>
+            <td><%= merchant.status %><td>
+          <td><%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch, params: {status: "disabled", id: merchant.id} %><td>
+          <td><% else merchant.status == "disabled" %><td>
+          <td><%= merchant.status %><td>
+          <td><%= button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch, params: {status: "enabled"} %><td>
+            </tr>
     <% end %>
     <% end  %>
+    </tbody>
+    </table>
