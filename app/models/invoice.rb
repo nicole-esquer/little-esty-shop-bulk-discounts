@@ -11,7 +11,12 @@ class Invoice < ApplicationRecord
   validates_presence_of :customer_id, :status
 
   def self.incomplete_invoices
-    Invoice.joins(:invoice_items).where.not(invoice_items: {status: 2}).group(:id).select('invoices.*').order(created_at: :asc).limit(5)
+    Invoice.joins(:invoice_items)
+    .where.not(invoice_items: {status: 2})
+    .group(:id)
+    .select('invoices.*')
+    .order(created_at: :asc)
+    .limit(5)
   end
 
   def top_five_customers
