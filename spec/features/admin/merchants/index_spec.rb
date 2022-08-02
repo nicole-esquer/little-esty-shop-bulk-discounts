@@ -94,6 +94,8 @@ RSpec.describe 'admin merchant index' do
         brenna_invoice_item8 = item_8.invoice_items.create!(
             item_id: item_8.id, invoice_id: invoice_3.id, quantity:1, 
             unit_price: item_8.unit_price, status: 1)
+           
+
 
         #the order of top 5 highest selling merchants is Shaquille, Kobe, Kevin, Steph, michael j
         #lebron and majic j did not make the cut
@@ -101,7 +103,7 @@ RSpec.describe 'admin merchant index' do
         visit "/admin/merchants"
         save_and_open_page
 
-        expect(page).to have_content("Top 5 Items by Generated Revenue:")
+        expect(page).to have_content("Top 5 Merchants by Generated Revenue:")
 
         within "#top_5_merchants" do
         expect(page).to have_link("Shaquille Oneal")
