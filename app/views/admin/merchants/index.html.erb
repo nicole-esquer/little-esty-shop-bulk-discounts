@@ -1,12 +1,13 @@
 <h1>Admin Merchant Index</h1>
 
- <h2> Top 5 Items by Generated Revenue: </h2>
-  <div id="top_5_items"> 
-    <% @merchant.top_5_items.each do |item| %>
-        <%= item.id %>
-        <%= link_to item.name, merchants_item_path(@merchant, item) %>
+ <h2> Top 5 Merchants by Generated Revenue: </h2>
+  <div id="top_5_merchants"> 
+    <% @merchants.top_5_merchants.each do |merchant| %>
+        <%= merchant.id %>
+        <%= link_to merchant.name, merchant_dashboard_path(merchant) %>
       <% end %>
   </div>
+
 
 
 <% @merchants.each do |merchant| %>
@@ -20,3 +21,4 @@
 
     <% end %>
     <% end  %>
+
