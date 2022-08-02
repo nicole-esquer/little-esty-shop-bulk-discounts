@@ -1,19 +1,32 @@
 <h1>Admin Merchant Index</h1>
 
+
+
+<h2>Enabled Items</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Item ID</th>
+      <th>Item Name</th>
+      <th>Status</th>
+      <th>Update Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
 <% @merchants.each do |merchant| %>
-<p><%=link_to merchant.name, "/admin/merchants/#{merchant.id}" %> </p>
-<% end  %>
-
-
-
-<% @merchants.each do |merchant| %>
-          <%= merchant.id %>
-          <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
-          <% if  merchant.status == 'Enable' %>
-          <%= button_to "Disable", "/admin/merchants", method: :patch, params: {status: "Disable", id: merchant.id} %>
-          <% else merchant.status == "Disable" %>
-          <%= merchant.status %>
-          <%= button_to "Enable", "/admin/merchants", method: :patch, params: {status: "Enable"} %>
-
+  <tr>
+          <td><%= merchant.id %><td>
+          <td><%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %><td>
+          <td><% if  merchant.status == 'enabled' %><td>
+          <td><%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch, params: {status: "disabled", id: merchant.id} %><td>
+          <td><% else merchant.status == "disabled" %><td>
+          <td><%= merchant.status %><td>
+          <td><%= button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch, params: {status: "enabled"} %><td>
+            </tr>
     <% end %>
     <% end  %>
+    </tbody>
+    </table>
