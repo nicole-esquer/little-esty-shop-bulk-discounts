@@ -105,7 +105,7 @@ RSpec.describe 'admin merchant index' do
             unit_price: item_8.unit_price, status: 2)
 
         visit "/admin/merchants"
-        save_and_open_page
+      
 
         expect(page).to have_content("Top 5 Merchants by Generated Revenue:")
 

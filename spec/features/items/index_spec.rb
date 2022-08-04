@@ -307,7 +307,7 @@ RSpec.describe "merchants items index page", type: :feature do
 
 
         visit merchants_items_path(merchant_1)
-        save_and_open_page
+   
 
         expect(page).to have_content("Top 5 Items by Generated Revenue:")
 
