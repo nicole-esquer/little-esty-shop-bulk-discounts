@@ -26,7 +26,7 @@ RSpec.describe "Merchant Item Show Page", type: :feature do
 
         click_link("Basket Ball")
 
-        expect(page).to have_current_path(merchants_item_path(merchant_1))
+        expect(page).to have_current_path(merchants_item_path(item_1))
         expect(page).to have_content("Basket Ball")
         expect(page).to have_content("Description: Wilson 29 in orange ball")
         expect(page).to have_content("Price: 25000")
