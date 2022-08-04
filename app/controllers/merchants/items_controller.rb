@@ -42,7 +42,7 @@ class Merchants::ItemsController < ApplicationController
     @item = Item.find(params[:id])
     if params[:update_status]
       if @item.update_status
-        binding.pry
+ 
         #  if @item.update!(merchant_items_params)
         redirect_to merchants_items_path(@merchant.id), notice: "Item status has been successfully updated!"
       else

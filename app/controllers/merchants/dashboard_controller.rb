@@ -2,6 +2,7 @@ class Merchants::DashboardController < ApplicationController
   include ApplicationHelper
 
   def show
+
     @merchant = Merchant.find(params[:merchant_id])
   end
 

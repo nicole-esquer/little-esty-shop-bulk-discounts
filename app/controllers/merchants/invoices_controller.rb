@@ -18,7 +18,6 @@ class Merchants::InvoicesController < ApplicationController
   end
 
   def update
-    require 'pry'; binding.pry 
     merchant = Merchant.find(params[:id])
     @invoice_item = InvoiceItem.find(params[:id])
     respond_to do |format|

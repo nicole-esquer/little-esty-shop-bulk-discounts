@@ -17,7 +17,6 @@ RSpec.describe 'Admin Merchant Show Page' do
   it "can see a link to update the merchants information" do
 
       visit "/admin/merchants/#{@merchant2.id}"
-      #binding.pry
       click_on "Update Name"
       #expect(current_path).to eq("/admin/merchants/#{merchant.id}/edit")
 
